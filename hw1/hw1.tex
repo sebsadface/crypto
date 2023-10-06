@@ -1,0 +1,265 @@
+%%%%%%%%%%%%%%%%%%%%% PACKAGE IMPORTS %%%%%%%%%%%%%%%%%%%%%
+\documentclass[11pt]{article}
+\usepackage{amsmath, amsfonts, amsthm, amssymb}
+\usepackage{lmodern}
+\usepackage{microtype}
+\usepackage{fullpage}       
+\usepackage{changepage}
+\usepackage{hyperref}
+\usepackage{blindtext}
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    filecolor=magenta,      
+    urlcolor=blue,
+    pdftitle={Overleaf Example},
+    pdfpagemode=FullScreen,
+    }
+\urlstyle{same}
+
+\newenvironment{level}%
+{\addtolength{\itemindent}{2em}}%
+{\addtolength{\itemindent}{-2em}}
+
+\usepackage{amsmath,amsthm,amssymb}
+
+
+\usepackage[x11names, rgb]{xcolor}
+\usepackage{graphicx}
+\usepackage[nooldvoltagedirection]{circuitikz}
+\usetikzlibrary{decorations,arrows,shapes}
+
+\usepackage{datetime}
+\usepackage{etoolbox}
+\usepackage{enumerate}
+\usepackage{enumitem}
+\usepackage{listings}
+\usepackage{array}
+\usepackage{varwidth}
+\usepackage{tcolorbox}
+\usepackage{circuitikz}
+\usepackage{verbatim}
+\usepackage[linguistics]{forest}
+\usepackage{listings}
+\usepackage{xcolor}
+
+\newcommand\doubleplus{+\kern-1.3ex+\kern0.8ex}
+\newcommand\mdoubleplus{\ensuremath{\mathbin{+\mkern-10mu+}}}
+
+\definecolor{codegreen}{rgb}{0,0.6,0}
+\definecolor{codegray}{rgb}{0.5,0.5,0.5}
+\definecolor{codepurple}{rgb}{0.58,0,0.82}
+\definecolor{backcolour}{rgb}{0.95,0.95,0.92}
+
+\lstdefinelanguage{JavaScript}{
+  keywords={typeof, new, true, false, catch, function, return, null, catch, switch, var, if, in, while, do, else, case, break},
+  keywordstyle=\color{blue}\bfseries,
+  ndkeywords={class, export, boolean, throw, implements, import, this},
+  ndkeywordstyle=\color{darkgray}\bfseries,
+  identifierstyle=\color{black},
+  sensitive=false,
+  comment=[l]{//},
+  morecomment=[s]{/*}{*/},
+  commentstyle=\color{purple}\ttfamily,
+  stringstyle=\color{red}\ttfamily,
+  morestring=[b]',
+  morestring=[b]"
+}
+
+\lstdefinestyle{mystyle}{
+    language=JavaScript,
+    backgroundcolor=\color{backcolour},   
+    commentstyle=\color{codegreen},
+    keywordstyle=\color{magenta},
+    numberstyle=\tiny\color{codegray},
+    stringstyle=\color{codepurple},
+    basicstyle=\ttfamily\footnotesize,
+    breakatwhitespace=false,         
+    breaklines=true,                 
+    captionpos=b,                    
+    keepspaces=true,                 
+    numbers=left,                    
+    numbersep=5pt,                  
+    showspaces=false,                
+    showstringspaces=false,
+    showtabs=false,                  
+    tabsize=2
+}
+
+\lstset{style=mystyle}
+%%%%%%%%%%%%%%%%%%%%%%%% QUESTION # %%%%%%%%%%%%%%%%%%%%%%%%
+%% You can ignore this for the most part. Basically it    %%
+%% helps number your questions and creates a new page     %%
+%% with each question for the aesthetics. It also creates %%
+%% parts i.e. (a) (b) (c) for multiple part questions.    %%
+%% To use do: \begin{question} ... \end{question}         %%
+%% and: \begin{part} ... \end{part}                       %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{5pt plus 1pt}
+
+\providetoggle{questionnumbers}
+\settoggle{questionnumbers}{true}
+\newcommand{\noquestionnumbers}{
+    \settoggle{questionnumbers}{false}
+}
+
+\newcounter{questionCounter}
+\newenvironment{question}[2][\arabic{questionCounter}]{%
+    \ifnum\value{questionCounter}=0 \else {\newpage}\fi%
+    \setcounter{partCounter}{0}%
+    \vspace{.25in} \hrule \vspace{0.5em}%
+    \noindent{\bf \iftoggle{questionnumbers}{Question #1: }{}#2}%
+    \addtocounter{questionCounter}{1}%
+    \vspace{0.8em} \hrule \vspace{.10in}%
+}
+
+\newcounter{partCounter}[questionCounter]
+\renewenvironment{part}[1][\alph{partCounter}]{%
+    \addtocounter{partCounter}{1}%
+    \vspace{.10in}%
+    \begin{indented}%
+       {\bf (#1)} %
+}{\end{indented}}
+
+\def\indented#1{\list{}{}\item[]}
+\let\indented=\endlist
+\def\show#1{\ifdefempty{#1}{}{#1\\}}
+
+%%%%%%%%%%%%%%%%%%%%%%%% SHORT CUTS %%%%%%%%%%%%%%%%%%%%%%%%
+%% This is just to improve your quality of life. Instead  %%
+%% of having to type long things, you can type short      %%
+%% things. Ex: \IMP instead of \rightarrow to get ->      %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\def\IMP{\rightarrow}
+\def\AND{\wedge}
+\def\OR{\vee}
+\def\BI{\leftrightarrow}
+\def\DIFF{\setminus}
+\def\SUB{\subseteq}
+
+\newcolumntype{C}{>{\centering\arraybackslash}m{1.5cm}}
+\renewcommand\qedsymbol{$\blacksquare$}
+
+%%%%%%%%%%%%%%%%%%%%%%%% ANSWER BOX %%%%%%%%%%%%%%%%%%%%%%%%
+%% This will improve the quality of life for your TA.     %%
+%% Use \begin{answer} and \end{answer} to surround your   %%
+%% answers so it will be easier to see. You can adjust    %%
+%% the background and frame colors below as needed.       %%
+%% Here is the manual to help: tinyurl.com/tcolorbox-man  %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newtcolorbox{answer}
+{
+  colback   = green!5!white,    % Background color
+  colframe  = green!75!black,   % Outline color
+  box align = center,           % Align box on text line
+  varwidth upper,               % Enables multi line input
+  hbox                          % Bounds box to text width
+}
+
+%%%%%%%%%%%%%%%%% Identifying Information %%%%%%%%%%%%%%%%%
+%% For 311, we'd rather you DIDN'T tell us who you are   %%
+%% in your homework so that we're not biased when        %%
+%% So, even if you fill this information in, it will not %%
+%% show up in the document unless you uncomment \header  %%
+%% below                                                 %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newcommand{\myhwname}{Homework 1}
+\newcommand{\myname}{Sebastian Liu}
+\newcommand{\myemail}{ll57@cs.washington.edu}
+\newcommand{\mysection}{AB}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%% Document Options %%%%%%%%%%%%%%%%%%%%%%
+\noquestionnumbers
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%% WORK BELOW %%%%%%%%%%%%%%%%%%%%%%%%
+\begin{document}
+
+\begin{center}
+    \textbf{Homework 1} \bigskip
+\end{center}
+
+%%%%%%%%%%%%%%%%%%%%%%%% Task 1 %%%%%%%%%%%%%%%%%%%%%%%%
+\begin{question}{Task 1 - Encryption Scheme (10 points)}
+    \begin{part}
+       \begin{answer}
+        
+       \end{answer}
+    \end{part}
+
+    \begin{part}
+        \begin{answer}
+         
+        \end{answer}
+     \end{part}
+
+\end{question}
+
+%%%%%%%%%%%%%%%%%%%%%%%% Task 1 %%%%%%%%%%%%%%%%%%%%%%%%
+\begin{question}{Task 2 - The Shuffle (19 points)}
+    \begin{part}
+       \begin{answer}
+        
+       \end{answer}
+    \end{part}
+
+    \begin{part}
+        \begin{answer}
+         
+        \end{answer}
+     \end{part}
+
+     \begin{part}
+        \begin{answer}
+         
+        \end{answer}
+     \end{part}
+
+     \begin{part}
+        \begin{answer}
+         
+        \end{answer}
+     \end{part}
+
+\end{question}
+
+%%%%%%%%%%%%%%%%%%%%%%%% Task 1 %%%%%%%%%%%%%%%%%%%%%%%%
+\begin{question}{Task 3 - Playing with AES (10 points)}
+    \begin{part}
+       \begin{answer}
+        
+       \end{answer}
+    \end{part}
+
+    \begin{part}
+        \begin{answer}
+         
+        \end{answer}
+     \end{part}
+
+     \begin{part}
+        \begin{answer}
+         
+        \end{answer}
+     \end{part}
+
+\end{question}
+
+%%%%%%%%%%%%%%%%%%%%%%%% Task 1 %%%%%%%%%%%%%%%%%%%%%%%%
+\begin{question}{Task 4 - Distinguishing Advantage (6 points)}
+    \begin{part}
+       \begin{answer}
+        
+       \end{answer}
+    \end{part}
+
+    \begin{part}
+        \begin{answer}
+         
+        \end{answer}
+     \end{part}
+
+\end{question}
+\end{document}
