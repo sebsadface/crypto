@@ -1,0 +1,250 @@
+\documentclass{homework}
+
+% ----- Students: How to use this file to prepare your solutions. -----
+%
+% First, ensure "homework.cls" is under the same directory as this file.
+%
+% Next, comment out the three lines of
+%     \This is ... posted ... due on ...
+% and use
+%     \ThisSolution is for ... by ... on ...
+% instead.
+% If you use "on today.", the date on your computer is used.
+% Otherwise, you can specify a particular date.
+%
+% An example is provided in the comments below.
+%
+% Next, for each "\Task ... -- ... (... points)":
+% 1. DO NOT remove "\Task ... -- ... (... points)".
+% 2. DO remove the task/subtask description text,
+%    including removing "\begin{subtasks} ... \end{subtasks}".
+%    They can be removed after you have written down your solutions,
+%    as you might want to make use of the equations from the description.
+% 3. After "\Task ... -- ... (... points)", use
+%        "\Subtask{...} ..."
+%    to specify the subtask number and write down your solutions.
+%
+% An example is provided in the comments below.
+%
+% "\This" and "\ThisSolution" can be used only once.
+% "\This", "\ThisSolution", and "\Task" control sequences have
+% special formats that MUST be respected (or your TeX compiler
+% will complain).
+% The prepositions and the final full stop MUST NOT be altered.
+%
+% ---------------------------------------------------------------------
+
+\def\Gen{{\mathsf{Gen}}}
+\def\Kg{{\mathsf{Kg}}}
+\def\Enc{{\mathsf{Enc}}}
+\def\Dec{{\mathsf{Dec}}}
+\def\Perms{{\mathsf{Perms}}}
+\def\Init{{\mathsf{Init}}}
+\def\Eval{{\mathsf{Eval}}}
+\def\AES{{\mathsf{AES}}}
+\def\RP{{\mathsf{RP}}}
+\def\BC{{\mathsf{BC}}}
+\def\Adv{{\mathsf{Adv}}}
+\def\prp{{\textup{prp}}}
+
+\begin{document}
+
+\This is Homework 1,
+posted on Wednesday, October 4, 2023 at 11:59pm
+and due on Wednesday,  October 11, 2023 at 11:59pm.
+
+\section*{Instructions and Rules}
+\begin{itemize}
+\item Write your solutions clearly, and ideally, type them up.
+If they are handwritten, you are responsible to ensure they are readable.
+Justify \emph{all claims} of your solution.
+Partially incorrect solutions can still be worth several points,
+but unjustified incorrect solutions will result in zero points for the corresponding question.
+\item You are not allowed to copy or transcribe answers to homework assignments from others or other sources. You are not allowed to look up solutions online.
+\item You need to provide an individual solution.
+You are allowed to have high-level discussions with other students
+(for instance, review the definition of a concept,
+discuss what a homework question mean, and
+high-level approaches).
+Please disclose if possible who you discussed with.
+\item You are given \emph{six} late days with no question asked,
+but can only use at most \emph{three} per homework.
+To use late days, send an e-mail to
+\href{mailto:cse426-staff@cs.washington.edu}%
+{\texttt{\small cse426-staff@cs.washington.edu}}
+\emph{before} the deadline.
+Other late submissions will be considered on a per-case basis,
+but expect to provide an explanation.
+\end{itemize}
+
+\Task 1 -- Encryption Scheme (10 points)
+
+Let ${\doubleZ_{10}=\{0,1,\dots,9\}}$.
+We consider a symmetric encryption scheme ${\Pi=(\Kg,\Enc,\Dec)}$, for which both the message and ciphertext spaces are
+${\scriptM=\scriptC=\doubleZ_{10}^4}$, i.e.,
+both a plaintext~$M$ and a ciphertext~$C$ consist of four decimal digits, and where:
+\begin{itemize}
+\item $\Kg$ outputs a secret key $K = (d,\pi)$, where
+${d\draws\doubleZ_{10}}$ and ${\pi\draws\Perms(\doubleZ_{10})}$,
+i.e.,
+$d$ is a uniformly chosen random decimal digit and
+$\pi$ is a uniformly chosen random permutation of the decimal digits.
+\item 
+The encryption algorithm is defined by the following procedure:
+\begin{align*}
+&\underline{\textbf{procedure }\Enc(K=(d,\pi),M=(M[1],\dots,M[4])):}\\
+&x_0\gets d\\
+&\textbf{for }i=1\textup{ to }4\textbf{ do}\\
+&\qquad x_i\gets(x_{i-1}+M[i]+1 - i)\bmod 10\\
+&\qquad C[i]\gets\pi(x_i)\\
+&\textbf{return }C=(C[1],\dots,C[4])
+\end{align*}
+\end{itemize}
+\begin{subtasks}
+\item\points{4}
+Complete the description of $\Pi$ by giving a decryption algorithm $\Dec$
+that satisfies the correctness requirement discussed in class.
+\item\points{6}
+Show that this encryption scheme is not perfectly secret.
+\end{subtasks}
+
+% The first part of the file should look like this
+% after you type your solution:
+
+% \Task 1 -- Encryption Scheme (10 points)
+%
+% \Subtask{a}
+%
+% The decryption algorithm lorem ipsum.
+%
+% \Subtask{b}
+%
+% Perfectly secure or not perfectly secure,
+% that is the question!
+
+\Task 2 -- The Shuffle (19 points)
+
+Consider the following symmetric encryption scheme $\Pi' =(\Kg',\Enc',\Dec')$ with plaintext space $\scriptM = \bit^n$. Moreover:
+\begin{itemize}
+\item $\Kg'$ outputs a secret key $\pi$, where
+${\pi\draws\Perms(\{1, \ldots, 2n\})}$, i.e.,
+$\pi$ is a uniformly chosen random permutation of the set $\{1, \ldots, 2n\}$.
+\item 
+The encryption algorithm is defined by the following procedure:
+\begin{align*}
+&\underline{\textbf{procedure }\Enc'(\pi,M=(M[1],\dots,M[n])):}\\
+&M' \gets M \concat \overline{M}\\
+&\textbf{for }i=1\textup{ to }2n\textbf{ do}\\
+&\qquad C[i]\gets M'[\pi(i)]\\
+&\textbf{return }C=(C[1],\dots,C[2n])
+\end{align*}
+Here, $\overline{M}$ is the bit-wise complement of $M$, i.e., $\overline{M}[i] = 1 - M[i]$ for all $i=1, \ldots, n$. Further, $M \concat \overline{M}$ is the concatenation of $M$ and $\overline{M}$.
+\end{itemize}
+\begin{subtasks}
+\item \points{4} Describe the ciphertext space $\scriptC$, i.e., the set of all possible valid ciphertexts resulting from encrypting a plaintext $M \in \scriptM$ with some key.
+
+\textcolorbf{Hint:} Find an invariant satisfied by $M'$ for all $M \in \bit^{n}$.
+
+
+\item \points{4} Complete the description of $\Pi'$ by giving a decryption algorithm $\Dec'$
+that satisfies the correctness requirement discussed in class.
+\item \points{8} Characterize the distribution of $\Enc'(\pi, M)$, for a uniformly chosen $\pi$ and an arbitrary $M \in \bit^n$. 
+
+\item \points{3} Conclude that $\Pi'$ satifies perfect secrecy.
+\end{subtasks}
+
+
+
+
+
+\Task 3 -- Playing with AES (10 points)
+
+We want to develop a better sense of
+the pseudorandomness of the ciphertexts generated by the AES block cipher.
+In particular,
+we will focus on the most commonly used variant with $128$-bit keys.
+Let $X$ be the $16$-byte string
+\begin{align*}
+X = 10\; 04\; 20\; 18\;
+00\; 00\; 00\; 00\; 00\; 00\; 00\; 00\; 00\; 00\; 00\; 00
+\end{align*}
+in hexadecimal format.
+
+\begin{subtasks}
+\item\points{2}
+What is the value of $\AES(X, X)$?
+Write the result in hexadecimal format.
+Here, $\AES(K, M)$ is the ciphertext generated by AES on key~$K$ and block~$M$.
+\item\points{4}
+Find a $16$-byte block~$M$
+such that the lower half of ${C = \AES(X, M)}$ is all zero.
+In other words, $C$ ends with $00\; 00\; 00\; 00\; 00\; 00\; 00\; 00$.
+Explain how you have found it! 
+\item\points{4} Find a $16$-byte key $K$ with the property that the last
+byte of $C = \AES(K, X)$ is equal to $00$.
+Explain how you have found it!
+\end{subtasks}
+You can use the Python code for AES (\texttt{hw1.py}) provided on
+\href{https://edstem.org/us/courses/47519/resources}{Ed},
+or any of your favorite programming languages and libraries,
+to help performing AES evaluations.  (Do {\em not} re-implement AES!)
+
+\Task 4 -- Distinguishing Advantage (6 points)
+
+The goal of this task is to practice with the notion of distinguishing
+advantage.
+%
+\smallskip
+
+\noindent To this end, we are given the following two oracles, $\mathsf{O}_0$ and~$\mathsf{O}_1$.
+They both are initialized by running the (private) procedure $\Init()$, and
+the adversary can then only call the procedure $\Eval()$.
+\begin{center}
+\begin{tabular}{|l|l|}
+\hline
+\underline{\textbf{oracle }$\mathsf{O}_0$:}\rule[1.2em]{0pt}{0pt} &
+\underline{\textbf{oracle }$\mathsf{O}_1$:}\rule[1.2em]{0pt}{0pt} \\
+& \\
+\underline{\emph{private }\textbf{procedure }$\Init()$:} &
+\underline{\emph{private }\textbf{procedure }$\Init()$:} \\
+${b_1\draws\bit},\,{b_2\draws\bit}$ &
+${b_1\draws\bit}$ \\
+&
+\textbf{if }${b_1=0}$\textbf{ then }${b_2\draws\bit}$ \\
+&
+\textbf{else }${b_2\gets 0}$ \\
+& \\
+\underline{\emph{public }\textbf{procedure }$\Eval()$:} &
+\underline{\emph{public }\textbf{procedure }$\Eval()$:} \\
+\textbf{return }${b_1\concat b_2}$\rule[-0.6em]{0pt}{0pt} &
+\textbf{return }${b_1\concat b_2}$\rule[-0.6em]{0pt}{0pt} \\
+\hline
+\end{tabular}
+\end{center}
+Here, ${b_1\concat b_2}$ is the concatenation of $b_1$ and~$b_2$.
+Consider the following distinguishers $D_1$ and~$D_2$,
+which are given access to an oracle $\mathsf{O}$
+that is either $\mathsf{O}_0$ or~$\mathsf{O}_1$:
+\begin{center}
+\begin{tabular}{|l|l|}
+\hline
+\underline{\textbf{distinguisher }$D_1^{\mathsf{O}}$:}\rule[1.2em]{0pt}{0pt} &
+\underline{\textbf{distinguisher }$D_2^{\mathsf{O}}$:}\rule[1.2em]{0pt}{0pt} \\[4pt]
+${b_1\concat b_2\gets \mathsf{O}.\Eval()}$\hspace*{5em} &
+${b_1\concat b_2\gets \mathsf{O}.\Eval()}$\hspace*{5em} \\
+\textbf{return }$b_1$\rule[-0.6em]{0pt}{0pt} &
+\textbf{return }${b_1\oplus b_2}$\rule[-0.6em]{0pt}{0pt} \\
+\hline
+\end{tabular}
+\end{center}
+\begin{subtasks}
+\item\points{3}
+What is the advantage of~$D_1$
+in distinguishing $\mathsf{O}_0$ and~$\mathsf{O}_1$?
+\item\points{3}
+What is the advantage of~$D_2$
+in distinguishing $\mathsf{O}_0$ and~$\mathsf{O}_1$?
+\end{subtasks}
+
+
+\end{document}

@@ -253,19 +253,24 @@
 \begin{question}{Task 3 - Playing with AES (10 points)}
     \begin{part}
        \begin{answer}
-        
+            AES$(X,X) =$ 24 f3 dc 26 07 11 10 ad 52 58 a4 55 67 14 d0 1d
        \end{answer}
     \end{part}
 
     \begin{part}
         \begin{answer}
-         
+           $C = $ AES$(X, M) =$ 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 when \\
+           $M =$ fd e4 d4 2d 80 2d 9e 09 18 fd 5f ae 0c 6f a2 9c  \\
+           I found $M$ by running the InvertAES function with $K = X$ and $C = $ 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
         \end{answer}
      \end{part}
 
      \begin{part}
         \begin{answer}
-         
+            $C = $ AES$(K, X) =$ 37 d9 12 89 07 fa 24 b0 17 b1 04 b2 aa ee 5e 00 when \\
+            $K =$ 1c 0b bc 7f 17 0d bf d6 8d c6 8d 37 d5 6c 71 cf \\
+            I found $K$ by brute forcing the key space (i.e. I wrote a while loop which generate a random 16-byte number as $K$ for each iteration 
+            and return the first $K$ whose AES$(K, X)$ output has its last byte as $00$).
         \end{answer}
      \end{part}
 
