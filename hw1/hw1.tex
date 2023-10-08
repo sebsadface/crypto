@@ -37,11 +37,14 @@
 \usepackage{array}
 \usepackage{varwidth}
 \usepackage{tcolorbox}
+\usepackage{amsmath}
 \usepackage{circuitikz}
 \usepackage{verbatim}
 \usepackage[linguistics]{forest}
 \usepackage{listings}
 \usepackage{xcolor}
+\renewcommand{\rmdefault}{cmss}
+
 
 \newcommand\doubleplus{+\kern-1.3ex+\kern0.8ex}
 \newcommand\mdoubleplus{\ensuremath{\mathbin{+\mkern-10mu+}}}
@@ -87,14 +90,6 @@
 }
 
 \lstset{style=mystyle}
-%%%%%%%%%%%%%%%%%%%%%%%% QUESTION # %%%%%%%%%%%%%%%%%%%%%%%%
-%% You can ignore this for the most part. Basically it    %%
-%% helps number your questions and creates a new page     %%
-%% with each question for the aesthetics. It also creates %%
-%% parts i.e. (a) (b) (c) for multiple part questions.    %%
-%% To use do: \begin{question} ... \end{question}         %%
-%% and: \begin{part} ... \end{part}                       %%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \setlength{\parindent}{0pt}
 \setlength{\parskip}{5pt plus 1pt}
 
@@ -125,12 +120,6 @@
 \def\indented#1{\list{}{}\item[]}
 \let\indented=\endlist
 \def\show#1{\ifdefempty{#1}{}{#1\\}}
-
-%%%%%%%%%%%%%%%%%%%%%%%% SHORT CUTS %%%%%%%%%%%%%%%%%%%%%%%%
-%% This is just to improve your quality of life. Instead  %%
-%% of having to type long things, you can type short      %%
-%% things. Ex: \IMP instead of \rightarrow to get ->      %%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \def\IMP{\rightarrow}
 \def\AND{\wedge}
 \def\OR{\vee}
@@ -138,16 +127,9 @@
 \def\DIFF{\setminus}
 \def\SUB{\subseteq}
 
+
 \newcolumntype{C}{>{\centering\arraybackslash}m{1.5cm}}
 \renewcommand\qedsymbol{$\blacksquare$}
-
-%%%%%%%%%%%%%%%%%%%%%%%% ANSWER BOX %%%%%%%%%%%%%%%%%%%%%%%%
-%% This will improve the quality of life for your TA.     %%
-%% Use \begin{answer} and \end{answer} to surround your   %%
-%% answers so it will be easier to see. You can adjust    %%
-%% the background and frame colors below as needed.       %%
-%% Here is the manual to help: tinyurl.com/tcolorbox-man  %%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \newtcolorbox{answer}
 {
   colback   = green!5!white,    % Background color
@@ -157,17 +139,11 @@
   hbox                          % Bounds box to text width
 }
 
-%%%%%%%%%%%%%%%%% Identifying Information %%%%%%%%%%%%%%%%%
-%% For 311, we'd rather you DIDN'T tell us who you are   %%
-%% in your homework so that we're not biased when        %%
-%% So, even if you fill this information in, it will not %%
-%% show up in the document unless you uncomment \header  %%
-%% below                                                 %%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \newcommand{\myhwname}{Homework 1}
 \newcommand{\myname}{Sebastian Liu}
 \newcommand{\myemail}{ll57@cs.washington.edu}
 \newcommand{\mysection}{AB}
+\newcommand{\dollararrow}{\stackrel{\$}{\leftarrow}}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 %%%%%%%%%%%%%%%%%%% Document Options %%%%%%%%%%%%%%%%%%%%%%
@@ -181,47 +157,95 @@
     \textbf{Homework 1} \bigskip
 \end{center}
 
-%%%%%%%%%%%%%%%%%%%%%%%% Task 1 %%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%% Task 1 %%%%%%%%%%%%%%%%%%%%%%%%M
 \begin{question}{Task 1 - Encryption Scheme (10 points)}
     \begin{part}
        \begin{answer}
-        
+            \underline{\textbf{procedure} Dec($K = (d, \pi), C = (C[1],...,C[4])$) :} \\
+            $x_0 \leftarrow d$ \\
+            \textbf{for} $i = 1$ to $4$ \textbf{do} \\
+            \hspace*{22pt} $x_i \leftarrow \pi(C[i])$ \\
+            \hspace*{22pt} $M[i] \leftarrow ( x_i - x_{i-1} - 1 + i )$ mod $10$ \\
+            \textbf{return} $M = (M[1],...,M[4])$ 
        \end{answer}
     \end{part}
 
     \begin{part}
         \begin{answer}
-         
+         \textbf{Proof.} Assume $M^* = C^* = (0,0,0,0)$, \\
+        \begin{align*}\underset{M \overset{\text{\$}}{\leftarrow} \mathbb{Z}_{10}^4}{\text{Pr}} [M = M^*] &= \underset{M[1] \overset{\text{\$}}{\leftarrow} \mathbb{Z}_{10}}{\text{Pr}} [M[1] = 0] \times 
+            \underset{M[2] \overset{\text{\$}}{\leftarrow} \mathbb{Z}_{10}}{\text{Pr}} [M[2] = 0] \times \underset{M[3] \overset{\text{\$}}{\leftarrow} \mathbb{Z}_{10}}{\text{Pr}} [M[3] = 0] \\
+            &\hspace*{20pt}\times \underset{M[4] \overset{\text{\$}}{\leftarrow} \mathbb{Z}_{10}}{\text{Pr}} [M[4] = 0]\\
+            &= \frac{1}{10} \times \frac{1}{10} \times \frac{1}{10} \times \frac{1}{10} = \frac{1}{10^4}  
+        \end{align*} 
+        Given $C^* = (0,0,0,0)$ and $x_0 = d$, using the decryption algorithm, we can derive: \\
+        \hspace*{22pt} $x_1 = x_2 = x_3 = x_4 = \pi(0)$, \\
+        \hspace*{22pt} $M[1] = (\pi(0) - d -1 + 1)$ mod $10 = (\pi(0) - d)$ mod $10$, \\
+        \hspace*{22pt} $M[2] = (\pi(0) - \pi(0) -1 + 2)$ mod $10 = (1)$ mod $10 = 1$, \\
+        \hspace*{22pt} $M[3] = (\pi(0) - \pi(0) -1 + 3)$ mod $10 = (2)$ mod $10 = 2$, \\
+        \hspace*{22pt} $M[4] = (\pi(0) - \pi(0) -1 + 4)$ mod $10 = (3)$ mod $10 = 3$, \\
+        which give us: $M = (M[1],...,M[4]) = ( (\pi(0) - d)$ mod $10, 1, 2, 3 ) \ne (0,0,0,0) = M^*$ \\
+        Thus, we have: \\ $ \underset{K \overset{\text{\$}}{\leftarrow} \text{Kg}, M \overset{\text{\$}}{\leftarrow} \mathbb{Z}_{10}^4}{\text{Pr}} [M = M^* \mid \text{Enc}(K = (d, \pi), M = (M[1],...,M[4]))= C^*] = 0 \ne \frac{1}{10^4} = \underset{M \overset{\text{\$}}{\leftarrow} \mathbb{Z}_{10}^4}{\text{Pr}} [M = M^*]$
+        , which is a violation of Shannon secrecy.\\\\
+        Therefore, this encryption scheme is not perfectly secret.
         \end{answer}
      \end{part}
-
 \end{question}
 
 %%%%%%%%%%%%%%%%%%%%%%%% Task 1 %%%%%%%%%%%%%%%%%%%%%%%%
 \begin{question}{Task 2 - The Shuffle (19 points)}
     \begin{part}
        \begin{answer}
-        
+            Since $\overline{M}$ is the bit-wise complement of $M$ and $M'$ is the concatenation of $M$ and $\overline{M}$,
+            we know $M'$ satisfies the invariant that it has the same number of $0$'s and $1$'s. \\
+            Since $\pi$ is a random permutation of $\{1,...,2n\}$ and $C[i] \leftarrow M'[\pi(i)]$, we know $C$ is effectively a random permutation of $M'$, 
+            which means $C$ also satisfies the invariant that it has the same number of $0$'s and $1$'s. \\
+            Additionally, since we know the length of $C$ is $2n$, $C$ must contain exactly $n$ $0$'s and $n$ $1$'s. \\
+            Therefore, the ciphertext space can be described as:\\
+            $\mathcal{C} = \{C \in \{0,1\}^{2n}: \text{where } C \text{ contains exactly }n \text{ 0's and } n \text{ 1's} \} $ \\
        \end{answer}
     \end{part}
 
     \begin{part}
         \begin{answer}
-         
+            \underline{\textbf{procedure} Dec'($\pi, C = (C[1],...,C[2n]))$ :} \\
+            \textbf{for} $i = 1$ to $2n$ \textbf{do} \\
+            \hspace*{22pt} $M'[\pi(i)] \leftarrow C[i]$ \\
+            \textbf{for} $j = 1$ to $n$ \textbf{do} \\
+            \hspace*{22pt} $M[j] \leftarrow M'[j]$ \\
+            \textbf{return} $M = (M[1],...,M[n])$ 
         \end{answer}
-     \end{part}
+    \end{part}
 
-     \begin{part}
+    \begin{part}
         \begin{answer}
-         
+            Since $\pi$ is a random permutation of $\{1,...,2n\}$, each bit position in the ciphertext is equally likely to be any bit
+            position in $M || \overline{M}$ which contains exactly $n$ 0's and $n$ 1's (as seen in part (a)). The encryption algorithm is effectively uniformly randomly shuffling $M || \overline{M}$. \\
+            Therefore, the distribution of Enc'$(\pi, M)$ is uniform over the ciphertext space $\mathcal{C}$. \\
+            Assume we pick an arbitrary ciphertext $C $ from the ciphertext space $\mathcal{C}$, the distribution of Enc'$(\pi, M)$ for all ciphertext $C \in \mathcal{C}$ can be described as:
+            \begin{align*}
+                \underset{\pi \overset{\text{\$}}{\leftarrow}  \text{Perms}(\{1,..,2n\}), M \overset{\text{\$}}{\leftarrow} \{0,1\}^n}{\text{Pr}} [\text{Enc'}(\pi, M) = C] &= 
+                \underset{C^* \overset{\text{\$}}{\leftarrow} \mathcal{C}}{\text{Pr}} [C = C^*] \\
+                &= \frac{1}{|\mathcal{C}|} \\
+                &= \frac{1}{\binom{2n}{n}} \\
+                &= \frac{(n!)^2}{(2n)!}
+            \end{align*}
         \end{answer}
-     \end{part}
-
-     \begin{part}
+    \end{part}
+    \newpage
+    \begin{part}
         \begin{answer}
-         
+            \textbf{Proof.} For all $M \in \{0,1\}^n$ and $C \in \mathcal{C}$, 
+            \begin{align*}
+                \underset{\pi \overset{\text{\$}}{\leftarrow} \text{Kg}}{\text{Pr}} [\text{Enc'}(\pi, M) = C] &= 
+                \underset{\pi \overset{\text{\$}}{\leftarrow}  \text{Perms}(\{1,..,2n\})}{\text{Pr}} [\text{Enc'}(\pi, M) = C] \\
+                &= \underset{C^* \overset{\text{\$}}{\leftarrow} \mathcal{C}}{\text{Pr}} [C = C^*] \tag{as explained in part(c), Enc' uniformly randomly shuffles $M || \overline{M}$}\\
+                &= \frac{1}{|\mathcal{C}|} \\
+                &= \frac{1}{\binom{2n}{n}} \\
+                &= \frac{(n!)^2}{(2n)!}
+            \end{align*}
         \end{answer}
-     \end{part}
+    \end{part}
 
 \end{question}
 
