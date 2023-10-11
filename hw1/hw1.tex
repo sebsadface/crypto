@@ -164,7 +164,7 @@
             \underline{\textbf{procedure} Dec($K = (d, \pi), C = (C[1],...,C[4])$) :} \\
             $x_0 \leftarrow d$ \\
             \textbf{for} $i = 1$ to $4$ \textbf{do} \\
-            \hspace*{22pt} $x_i \leftarrow \pi(C[i])$ \\
+            \hspace*{22pt} $x_i \leftarrow \pi^{-1}(C[i])$ \\
             \hspace*{22pt} $M[i] \leftarrow ( x_i - x_{i-1} - 1 + i )$ mod $10$ \\
             \textbf{return} $M = (M[1],...,M[4])$ 
        \end{answer}
@@ -180,11 +180,11 @@
         \end{align*} 
         Given $C^* = (0,0,0,0)$ and $x_0 = d$, using the decryption algorithm, we can derive: \\
         \hspace*{22pt} $x_1 = x_2 = x_3 = x_4 = \pi(0)$, \\
-        \hspace*{22pt} $M[1] = (\pi(0) - d -1 + 1)$ mod $10 = (\pi(0) - d)$ mod $10$, \\
-        \hspace*{22pt} $M[2] = (\pi(0) - \pi(0) -1 + 2)$ mod $10 = (1)$ mod $10 = 1$, \\
-        \hspace*{22pt} $M[3] = (\pi(0) - \pi(0) -1 + 3)$ mod $10 = (2)$ mod $10 = 2$, \\
-        \hspace*{22pt} $M[4] = (\pi(0) - \pi(0) -1 + 4)$ mod $10 = (3)$ mod $10 = 3$, \\
-        which give us: $M = (M[1],...,M[4]) = ( (\pi(0) - d)$ mod $10, 1, 2, 3 ) \ne (0,0,0,0) = M^*$ \\
+        \hspace*{22pt} $M[1] = (\pi^{-1}(0) - d -1 + 1)$ mod $10 = (\pi^{-1}(0) - d)$ mod $10$, \\
+        \hspace*{22pt} $M[2] = (\pi^{-1}(0) - \pi^{-1}(0) -1 + 2)$ mod $10 = (1)$ mod $10 = 1$, \\
+        \hspace*{22pt} $M[3] = (\pi^{-1}(0) - \pi^{-1}(0) -1 + 3)$ mod $10 = (2)$ mod $10 = 2$, \\
+        \hspace*{22pt} $M[4] = (\pi^{-1}(0) - \pi^{-1}(0) -1 + 4)$ mod $10 = (3)$ mod $10 = 3$, \\
+        which give us: $M = (M[1],...,M[4]) = ( (\pi^{-1}(0) - d)$ mod $10, 1, 2, 3 ) \ne (0,0,0,0) = M^*$ \\
         Thus, we have: \\ $ \underset{K \overset{\text{\$}}{\leftarrow} \text{Kg}, M \overset{\text{\$}}{\leftarrow} \mathbb{Z}_{10}^4}{\text{Pr}} [M = M^* \mid \text{Enc}(K = (d, \pi), M = (M[1],...,M[4]))= C^*] = 0 \ne \frac{1}{10^4} = \underset{M \overset{\text{\$}}{\leftarrow} \mathbb{Z}_{10}^4}{\text{Pr}} [M = M^*]$
         , which is a violation of Shannon secrecy.\\\\
         Therefore, this encryption scheme is not perfectly secret.
@@ -192,7 +192,7 @@
      \end{part}
 \end{question}
 
-%%%%%%%%%%%%%%%%%%%%%%%% Task 1 %%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%% Task 2 %%%%%%%%%%%%%%%%%%%%%%%%
 \begin{question}{Task 2 - The Shuffle (19 points)}
     \begin{part}
        \begin{answer}
@@ -249,8 +249,8 @@
 
 \end{question}
 
-%%%%%%%%%%%%%%%%%%%%%%%% Task 1 %%%%%%%%%%%%%%%%%%%%%%%%
-\begin{question}{Task 3 - Playing with AES (10 points)}
+%%%%%%%%%%%%%%%%%%%%%%%% Task 3 %%%%%%%%%%%%%%%%%%%%%%%%
+\begin{question}{Task 3 - Playing with AES (10 points)} %%May be explain more
     \begin{part}
        \begin{answer}
             AES$(X,X) =$ 24 f3 dc 26 07 11 10 ad 52 58 a4 55 67 14 d0 1d
@@ -261,7 +261,9 @@
         \begin{answer}
            $C = $ AES$(X, M) =$ 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 when \\
            $M =$ fd e4 d4 2d 80 2d 9e 09 18 fd 5f ae 0c 6f a2 9c  \\
-           I found $M$ by running the InvertAES function with $K = X$ and $C = $ 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+           I found $M$ by running the InvertAES function with $K = X$ and $C = $ 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00.\\
+           It works because block cipher creates a permutation of the set of all possible 128-bit blocks, so there must be a $M$ that satisfy 
+           the requirement of $C$ with the given key $X$.
         \end{answer}
      \end{part}
 
@@ -276,7 +278,7 @@
 
 \end{question}
 
-%%%%%%%%%%%%%%%%%%%%%%%% Task 1 %%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%% Task 4 %%%%%%%%%%%%%%%%%%%%%%%%
 \begin{question}{Task 4 - Distinguishing Advantage (6 points)}
     \begin{part}
        \begin{answer}
