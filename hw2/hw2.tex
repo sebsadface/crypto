@@ -132,7 +132,7 @@
 \renewcommand\qedsymbol{$\blacksquare$}
 \newtcolorbox{answer}
 {
-  colback   = green!5!white,    % Background color
+  colback   = green!5!white,    % Background colorucyitc,
   colframe  = green!75!black,   % Outline color
   box align = center,           % Align box on text line
   varwidth upper,               % Enables multi line input
@@ -161,13 +161,34 @@
 \begin{question}{Task 1 - Negligible Functions (10 points)}
     \begin{part}
        \begin{answer}
-
+            \textbf{The function $f(k)$ is negligible.}\\\\
+            \textbf{Proof.} For all $d \ge 1$, we want to find $k_0$ such that for all $k > k_0$,
+            we have $k^{-log^2(k)} < k^{-d}$.\\
+            We take logarithms to the base two of both sides, we get $k^{-log^2(k)} < k^{-d}$ is equivalent to:
+            $$log^2(k) > d$$ 
+            If we take for example $k_0 = 2^d$, then for all $k > k0$ we have:
+            $$log^2(k) > log^2(k_0) = log^2(2^d) > d$$
+            The first inequality follows from the fact that $k \mapsto log^2(k)$ grows monotonically, the last inequality follows from the fact that $log^2(2^d) = d^2 > d$ for all $d \ge 1$.
        \end{answer}
     \end{part}
-
+\newpage
     \begin{part}
         \begin{answer}
-        
+            \begin{part}[i]
+                    Since $f(k)$ and $g(k)$ are both negligible, by the definition of negligible functions, we know there exists $k_f$ and $k_g$ such that for all $k > k_f$ and $k > k_g$:
+                $$f(k) < k^{-d} \text{ and } g(k) < k^{-d}$$
+                We can take $k_1 =$ max$(k_f, k_g, 3)$, then for all $k > k_1$ we have:
+                $$h_1(k) = f(k) + g(k) < 2k^{-d} < 2k^{-d-1} < k \cdot k^{-d - 1} < k^{-d}$$
+                Therefore, by definition, $h_1(k)$ is negligible.\\
+            \end{part}
+
+            \begin{part}[ii]
+                Assume $d' = d + c$, since $d \ge 1$ and $c > 0$, we know $d' > 1$. Since $f(k)$ is negligible, by the definition of negligible functions, we know for all $d' > 1$ there exists $k_f$ such that for all $k > k_f$: 
+                $$f(k) < k^{-d'}$$
+                We can take $k_2 = k_f$, then for all $k > k_2$ we have:
+                $$h_2(k) = k^c \cdot f(k) < k^c \cdot k^{-d'} = k^{-d' + c} = k^{-(d + c) + c} = k^{-d}$$
+                Therefore, by definition, $h_2(k)$ is negligible.\\
+            \end{part}
         \end{answer}
      \end{part}
 \end{question}
@@ -176,19 +197,35 @@
 \begin{question}{Task 2 - Block Ciphers (10 points)}
     \begin{part}
        \begin{answer}
-            
+        Since $\Upsilon_0$ and $\Upsilon_1$ are evaluated using the same key, we know once we find a key that satisfies $E(K',0^n) = \Upsilon_0$, we can use the same key to satisfy $E(K',1^n) = \Upsilon_1$. \\
+        We can see that the distinguisher only returns 1 when it finds a $K'$ that satisfy the condition above in the entire key space. Since the key for evaluating the block cipher is chosen uniformly at random and 
+        the distinguisher is searching through the entire key space, we have:
+            $$Pr[D^{KF[E]} \Rightarrow 1] = |K'| \times Pr[E(K',0^n) = \Upsilon_0] = 
+            |K'| \times \underset{K \overset{\text{\$}}{\leftarrow} \{0,1\}^n}{\text{Pr}}[K = K'] = 2^n \times \frac{1}{2^{n}} = 1 $$
        \end{answer}
     \end{part}
 
     \begin{part}
         \begin{answer}
-           
+            For some $K' \in \{0,1\}^n$, we have:
+            \begin{align*}
+                & Pr[E(K', 0^n) = \Upsilon_0 \text{ and } E(K', 1^n) = \Upsilon_1] \\
+                 =  &Pr[E(K', 0^n) = \Upsilon_0] \times Pr[E(K', 1^n) = \Upsilon_1 \mid E(K', 0^n) = \Upsilon_0]\\
+                 = & \frac{1}{2^n} \times \frac{1}{2^n - 1} = \frac{1}{2^{2n} - 2^n} 
+            \end{align*}
+            Since distinguisher $D$ search through the entire key space, we have \textbf{the upper bound probability that $D$ outputs 1 is}:
+            $$Pr[D^{RP[n]} \Rightarrow 1] = |K'| \times Pr[E(K', 0^n) = \Upsilon_0 \text{ and } E(K', 1^n) = \Upsilon_1] = 2^n \times \frac{1}{2^{2n} - 2^n} = \frac{1}{2^n -1}$$
+            Therefore we know:
+            $$\text{Adv}_\text{E}^{\text{prp}}(D) = |Pr[D^{KF[E]} \Rightarrow 1] - Pr[D^{RP[n] \Rightarrow 1}]| = |1 - \frac{1}{2^n -1}| = \frac{2^n - 2}{2^n -1}$$
+
         \end{answer}
     \end{part}
 
     \begin{part}
         \begin{answer}
-           
+           The distinguisher doesn't contradict the existence of secure pseudorandom permutations because the distinguisher runs in exponential time (since it searches through the entire key space which grows exponentially as the key length grows).
+           The security of pseudorandom permutations is defined on distinguishers that runs in polynomial time, since in the real world we don't have a computer that has virtually unlimited computational power
+           to efficiently run the $O(2^n)$ algorithm in the distinguisher above on a large enough key space. 
         \end{answer}
     \end{part}
    
@@ -199,7 +236,21 @@
 \begin{question}{Task 3 - IND-CPA Security (9 points)} %%May be explain more
     \begin{part}
        \begin{answer}
-           
+        \begin{tabular}{|l|}
+        \hline
+            \underline{\textbf{distinguisher} $D^{\text{LR}_{b [\Pi]}}$:} \\
+                $C_1 \leftarrow \text{LR}_{b [\Pi]}.\text{Encrypt}(0^n, 0^n)$ \\
+                $C_2 \leftarrow \text{LR}_{b [\Pi]}.\text{Encrypt}(0^n, 1^n)$ \\
+                \textbf{if $C_1 = C_2$ then} \\
+                \hspace{1em} \textbf{return} 1 \\
+                \textbf{return }0 \\
+            \hline
+            \end{tabular}\\\\\\
+        Since Enc is deterministic, we know for some $K \overset{\text{\$}}{\leftarrow} Kg()$: 
+        $$Pr[D^{\text{LR}_{0 [\Pi]}} \Rightarrow 1] = Pr[\text{Enc}(K, 0^n) = \text{Enc}(K, 0^n)] = 1$$
+        $$Pr[D^{\text{LR}_{1 [\Pi]}} \Rightarrow 1] = Pr[\text{Enc}(K, 0^n) = \text{Enc}(K, 1^n)] = 0$$
+        Therefore, we know that $\Pi$ cannot be IND-CPA secure, since: 
+        $$\text{Adv}_\Pi^{\text{ind-cpa}}(D) = |Pr[D^{\text{LR}_{0 [\Pi]}} \Rightarrow 1] - Pr[D^{\text{LR}_{1 [\Pi]}} \Rightarrow 1]| = |1 - 0| = 1$$
        \end{answer}
     \end{part}
 
