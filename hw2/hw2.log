@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023) (preloaded format=pdflatex 2023.3.31)  17 OCT 2023 13:57
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023) (preloaded format=pdflatex 2023.3.31)  17 OCT 2023 18:10
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -969,43 +969,43 @@ Package microtype Info: Loading generic protrusion settings for font family
 (microtype)             `cmss' (encoding: TS1).
 (microtype)             For optimal results, create family-specific settings.
 (microtype)             See the microtype manual for details.
- [3{/usr/local/texlive/2023/texmf-dist/fonts/enc/dvips/cm-super/cm-super-ts1.enc}]
-Underfull \hbox (badness 10000) in paragraph at lines 254--254
+ [3{/usr/local/texlive/2023/texmf-dist/fonts/enc/dvips/cm-super/cm-super-ts1.enc}] [4]
+Underfull \hbox (badness 10000) in paragraph at lines 274--274
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 254--254
+Underfull \hbox (badness 10000) in paragraph at lines 274--274
 
  []
 
 
-Underfull \hbox (badness 10000) detected at line 254
+Underfull \hbox (badness 10000) detected at line 274
 
  []
 
 
-Underfull \hbox (badness 10000) detected at line 254
+Underfull \hbox (badness 10000) detected at line 274
 
  []
 
-[4] [5] [6] (./hw2.aux)
+[5] [6] [7] (./hw2.aux)
 Package rerunfilecheck Info: File `hw2.out' has not changed.
 (rerunfilecheck)             Checksum: D41D8CD98F00B204E9800998ECF8427E;0.
  ) 
 Here is how much of TeX's memory you used:
- 54563 strings out of 476025
- 1329738 string characters out of 5790017
+ 54569 strings out of 476025
+ 1329795 string characters out of 5790017
  1956434 words of memory out of 5000000
- 74352 multiletter control sequences out of 15000+600000
- 528160 words of font info for 75 fonts, out of 8000000 for 9000
+ 74353 multiletter control sequences out of 15000+600000
+ 528290 words of font info for 77 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  99i,18n,95p,1631b,541s stack positions out of 10000i,1000n,20000p,200000b,200000s
 </usr/local/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmss10.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmss8.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmssbx10.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/lm/lmmi10.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/lm/lmmi6.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/lm/lmmi8.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/lm/lmr10.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/lm/lmr6.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/lm/lmr8.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/lm/lmsy10.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/lm/lmsy6.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/lm/lmsy8.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/cm-super/sfss0600.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/cm-super/sfss0800.pfb>
-Output written on hw2.pdf (6 pages, 156800 bytes).
+Output written on hw2.pdf (7 pages, 161812 bytes).
 PDF statistics:
- 112 PDF objects out of 1000 (max. 8388607)
- 75 compressed objects within 1 object stream
- 7 named destinations out of 1000 (max. 500000)
+ 118 PDF objects out of 1000 (max. 8388607)
+ 80 compressed objects within 1 object stream
+ 8 named destinations out of 1000 (max. 500000)
  15885 words of extra memory for PDF output out of 17280 (max. 10000000)
 

@@ -233,7 +233,7 @@
 \end{question}
 
 %%%%%%%%%%%%%%%%%%%%%%%% Task 3 %%%%%%%%%%%%%%%%%%%%%%%%
-\begin{question}{Task 3 - IND-CPA Security (9 points)} %%May be explain more
+\begin{question}{Task 3 - IND-CPA Security (9 points)} 
     \begin{part}
        \begin{answer}
         \begin{tabular}{|l|}
@@ -245,24 +245,41 @@
                 \hspace{1em} \textbf{return} 1 \\
                 \textbf{return }0 \\
             \hline
-            \end{tabular}\\\\\\
-        Since Enc is deterministic, we know for some $K \overset{\text{\$}}{\leftarrow} Kg()$: 
+            \end{tabular}\\
+        Since Enc is deterministic, we know for some $K \overset{\text{\$}}{\leftarrow} $ Kg(): 
         $$Pr[D^{\text{LR}_{0 [\Pi]}} \Rightarrow 1] = Pr[\text{Enc}(K, 0^n) = \text{Enc}(K, 0^n)] = 1$$
         $$Pr[D^{\text{LR}_{1 [\Pi]}} \Rightarrow 1] = Pr[\text{Enc}(K, 0^n) = \text{Enc}(K, 1^n)] = 0$$
         Therefore, we know that $\Pi$ cannot be IND-CPA secure, since: 
         $$\text{Adv}_\Pi^{\text{ind-cpa}}(D) = |Pr[D^{\text{LR}_{0 [\Pi]}} \Rightarrow 1] - Pr[D^{\text{LR}_{1 [\Pi]}} \Rightarrow 1]| = |1 - 0| = 1$$
        \end{answer}
     \end{part}
-
+\newpage
     \begin{part}
         \begin{answer}
-
+            Assume we have some arbitrary plaintexts $M_0, M_1 \in \mathcal{M}$. \\\\
+            For an arbitrary distinguisher, we know $Pr[D^{\text{LR}_{0 [\Pi]}} \Rightarrow 1]$ and $Pr[D^{\text{LR}_{1 [\Pi]}} \Rightarrow 1]$ only differ by
+            the single query allowed on $\text{LR}_{0 [\Pi]}.\text{Encrypt}(M_0, M_1)$ and $\text{LR}_{1 [\Pi]}.\text{Encrypt}(M_0, M_1)$ respectively.\\
+            
+            By perfect secrecy, we know for all ciphertexts $C \in \mathcal{C}$:
+            $$\underset{K \overset{\$}{\leftarrow} \text{Kg()}}{Pr}[\text{Enc}(K, M_0) = C] = \underset{K \overset{\$}{\leftarrow} \text{Kg()}}{Pr}[\text{Enc}(K, M_1) = C]$$
+            Therefore, by the definition of $\text{LR}_{b [\Pi]}$, we know for all $M_0, M_1 \in \mathcal{M}, C \in \mathcal{C}$:
+            \begin{align*}  
+            & Pr[\text{LR}_{0 [\Pi]}.\text{Encrypt}(M_0, M_1) = C]  = \underset{K \overset{\$}{\leftarrow} \text{Kg()}}{Pr}[\text{Enc}(K, M_0) = C]\\
+             = & \underset{K \overset{\$}{\leftarrow} \text{Kg()}}{Pr}[\text{Enc}(K, M_1) = C] = Pr[\text{LR}_{1 [\Pi]}.\text{Encrypt}(M_0, M_1) = C]
+            \end{align*}
+            Since now the only difference between  $Pr[D^{\text{LR}_{0 [\Pi]}} \Rightarrow 1]$ and $Pr[D^{\text{LR}_{1 [\Pi]}} \Rightarrow 1]$ are shown to have equal probability, we know:
+            $$Pr[D^{\text{LR}_{0 [\Pi]}} \Rightarrow 1] = Pr[D^{\text{LR}_{1 [\Pi]}} \Rightarrow 1]$$
+            Therefore:
+            $$\text{Adv}_\Pi^{\text{ind-cpa}}(D) = |Pr[D^{\text{LR}_{0 [\Pi]}} \Rightarrow 1] - Pr[D^{\text{LR}_{1 [\Pi]}} \Rightarrow 1]| = 0$$
         \end{answer}
      \end{part}
 
      \begin{part}
-        \begin{answer}
-            
+        \begin{answer} 
+        The one-time pad is deterministic, but its security comes from the randomness of the one-time key In a),
+        the deterministic nature of one-time pad was exploitable because the same key was used for multiple encryptions, which allows patterns of the ciphertext
+        to be leaked. In b), since we restrict the distinguisher to have only one query, which allowed the one-time pad to preserve its security properties by only allowing
+        one key to be used once. b) does not contradict a), instead the combination of them shows that the one-time pad is (1,0)-IND-CPA secure.
         \end{answer}
      \end{part}
 
@@ -272,7 +289,9 @@
 \begin{question}{Task 4 - More IND-CPA Security (8 points)}
     \begin{part}
        \begin{answer}
-        
+        \underline{\textbf{procedure} Dec'($K,C'$) :} \\
+        \hspace{1em} $C \leftarrow (C'$ with the last occurrence of 0 removed) \\
+        \textbf{return} Dec($K,C$) 
        \end{answer}
     \end{part}
 
