@@ -297,7 +297,22 @@
 
     \begin{part}
         \begin{answer}
+            For some arbitrary plaintexts $ M_0, M_1 \in \mathcal{M} $: \\\\
+
+            Let $ D $ be an arbitrary distinguisher for $\Pi'$. $D$ queries $\text{LR}_{b [\Pi']}.\text{Encrypt}(M_0, M_1)$ (i.e. $ \text{Enc'}(K, M_0) $ or $ \text{Enc'}(K, M_1)$) to get some ciphertext $C'$. Then $D$ 
+            does some computation to produce an output. \\\\
+
+            Let $ D' $ be a distinguisher for $\Pi$ that queries $\text{LR}_{b [\Pi]}.\text{Encrypt}(M_0, M_1)$ (i.e. $ \text{Enc}(K, M_0) $ or $ \text{Enc}(K, M_1)$) to get some ciphertext $C$.
+            $D'$ then appends 0 to $ C $ to get $ C' $, and sends $ C' $ to $ D $. $D'$ then outputs whatever $D$ outputs based on the $C'$.\\\\
+
+            By the definition above, we can see that for any distinguisher $D$ there's a unique corresponding $D'$ that appends 0 to some $C$ to get $C'$ and sends $C'$ to $D$. Since
+            appending 0 to some arbitrary text is $O(1)$ function,  $D'$ is still polynomial time if $D$ is polynomial time.\\\\
             
+            
+            Since $ C' $ in $ \Pi' $ is just $ C $ in $\Pi$ with an additional 0 at the end, the advantage of $ D' $ in distinguishing between $ \text{Enc}(K, M_0) $ and $ \text{Enc}(K, M_1) $ is the same as the advantage of
+             $ D $ in distinguishing between $ \text{Enc'}(K, M_0) $ and $ \text{Enc'}(K, M_1) $ (i.e. $\text{Adv}_{\Pi}^{\text{ind-cpa}}(D') = \text{Adv}_{\Pi'}^{\text{ind-cpa}}(D $).\\\\
+
+            Therefore, we know given that $\Pi$ is IND-CPA secure, $\Pi'$ is also IND-CPA secure.
         \end{answer}
      \end{part}
 
@@ -307,12 +322,73 @@
 \begin{question}{Task 5 - Pseudorandom Functions (8 points)}
     \begin{part}
        \begin{answer}
-        
-       \end{answer}
-    \end{part}
+        For H$(K_1||K_2, x_1||x_2||x_3) = $ H$(K_1||K_2, x_1'||x_2'||x_3')$, one strategy is to let:\\
+        E$(K_1, x_1) = $ E$(K_1, x_1')$ and E$(K_2, x_1\oplus x_2 \oplus x_3) = $ E$(K_2, x_3')$ and E$(K_2, x_3) = $ E$(K_2, x_1'\oplus x_2' \oplus x_3')$.\\\\
+        Since E is a PRF, we know:
+        \begin{itemize}
+            \item E$(K_1, x_1) = $ E$(K_1, x_1')$ implies $x_1 = x_1'$
+            \item E$(K_2, x_1\oplus x_2 \oplus x_3) = $ E$(K_2, x_3')$ implies $x_1\oplus x_2 \oplus x_3 =  x_3'$
+            \item E$(K_2, x_3) = $ E$(K_2, x_1'\oplus x_2' \oplus x_3')$ implies $x_3 = x_1'\oplus x_2' \oplus x_3'$
+        \end{itemize}
+       Therefore, for some $x_1, x_2, x_3 \in \{0,1\}^n$ where $x_1 \oplus x_2 \oplus x_3 \ne x_3$, we have:
+       $(x_1', x_2', x_3')$ where $x_1' = x_1, x_2' = x_2, x_3' = x_1 \oplus x_2 \oplus x_3$ satisfy that: \\for 
+       all $K_1, K_2 \in \{0,1\}^n$: $(x_1, x_2, x_3) \ne (x_1', x_2', x_3')$ such that 
+        H$(K_1||K_2, x_1||x_2||x_3) = $ H$(K_1||K_2, x_1'||x_2'||x_3')$.\\\\
 
+        One example can be:
+        \begin{itemize}
+            \item $(x_1, x_2, x_3) = (\{1\}^n,\{0\}^n,\{1\}^n)$
+            \item $(x_1', x_2', x_3') = (\{1\}^n,\{0\}^n,\{0\}^n)$
+            \item H$(K_1||K_2, x_1||x_2||x_3) = \text{E}(K_1, \{1\}^n) \oplus \text{E}(K_2, \{1\}^n \oplus \{0\}^n \oplus \{1\}^n) \oplus \text{E}(K_2, \{1\}^n)
+            = \text{E}(K_1, \{1\}^n) \oplus \text{E}(K_2, \{0\}^n ) \oplus \text{E}(K_2, \{1\}^n)$
+            \item H$(K_1||K_2, x_1'||x_2'||x_3') = \text{E}(K_1, \{1\}^n) \oplus \text{E}(K_2, \{1\}^n \oplus \{0\}^n \oplus \{0\}^n) \oplus \text{E}(K_2, \{0\}^n) = 
+            \text{E}(K_1, \{1\}^n) \oplus \text{E}(K_2, \{1\}^n ) \oplus \text{E}(K_2, \{0\}^n) = \text{E}(K_1, \{1\}^n) \oplus \text{E}(K_2, \{0\}^n ) \oplus \text{E}(K_2, \{1\}^n)$  
+            \item So H$(K_1||K_2, x_1||x_2||x_3) = $ H$(K_1||K_2, x_1'||x_2'||x_3')$ 
+        \end{itemize}
+    \end{answer}
+    \end{part}
+\newpage
     \begin{part}
         \begin{answer}
+            We define following oracles and distinguisher:\\\\
+            \begin{tabular}{|l|}
+                \hline
+                    \underline{\textbf{oracle} KF[H]:} \\\\
+                    \underline{private \textbf{procedure} Init():}\\
+                        $K_1 \overset{\text{\$}}{\leftarrow} \{0,1\}^k$\\
+                        $K_2 \overset{\text{\$}}{\leftarrow} \{0,1\}^k$\\
+                    \underline{public \textbf{procedure} Eval($X$):}\\
+                        \textbf{return} H$(K_1||K_2, X)$\\
+                    \hline
+            \end{tabular}
+            \begin{tabular}{|l|}
+                \hline
+                    \underline{\textbf{oracle} RF[$m,n$]:} \\\\
+                    \underline{private \textbf{procedure} Init():}\\
+                        $T \leftarrow $ empty dictionary\\
+                    \underline{public \textbf{procedure} Eval($X$):}\\
+                        \textbf{if} $T[X] = \perp$ \textbf{then} $T[X] \overset{\text{\$}}{\leftarrow} \{0,1\}^n$ \\
+                        \textbf{return} $T[X]$\\
+                    \hline
+            \end{tabular}\\\\\\  
+            \begin{tabular}{|l|}
+                \hline
+                    \underline{\textbf{distinguisher} $D^{\text{O}}$:} \\
+                        $(x_1,x_2,x_3) \overset{\text{\$}}{\leftarrow} (\{0,1\}^n, \{0,1\}^n, \{0,1\}^n)$ \\
+                        $(x_1',x_2',x_3') \leftarrow (x_1, x_2, x_1 \oplus x_2 \oplus x_3)$\\
+
+                        $C \leftarrow $ O.Eval$(x_1||x_2||x_3)$\\
+                        $C' \leftarrow $ O.Eval$(x_1'||x_2'||x_3)$\\
+                        \textbf{if $C = C'$ then} \\
+                        \hspace{1em} \textbf{return} 1 \\
+                        \textbf{return }0 \\
+                    \hline
+                    \end{tabular}\\ \\\\
+                    Since we have from a) that H$(K_1||K_2, x_1||x_2||x_3) = $ H$(K_1||K_2, x_1'||x_2'||x_3')$, we know $Pr[D^{KF[H]} \Rightarrow 1]$ since the
+                    distinguisher $D$ is just checking if the oracle returns the same value for $(x_1||x_2||x_3)$ and $(x_1'||x_2'||x_3')$ .\\\\
+                    Therefore, we have:
+                    $\text{Adv}_\text{H}^{\text{prf}}(D) = |Pr[D^{KF[H]} \Rightarrow 1] - Pr[D^{RF[m,n]} \Rightarrow 1]| = |1 - \frac{1}{2^n}|$ \\
+                    Since $\frac{1}{2^n}$ shrinks exponentially as $n$ grows, we know that $\text{Adv}_\text{H}^{\text{prf}}(D)$ is large.
             
         \end{answer}
      \end{part}
