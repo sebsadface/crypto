@@ -176,13 +176,39 @@
 \begin{question}{Task 2 - When IVs Collide (8 points)}
     \begin{part}
        \begin{answer}
-        
+            By the encryption procedure of CTR mode, we know:
+            $$C_0[i] \leftarrow M_0[i] \oplus \text{E}(K, \text{IV}_0 + i)$$
+            $$C_1[i] \leftarrow M_1[i] \oplus \text{E}(K, \text{IV}_1 + i)$$
+            
+            Since $C_0[0] = C_1[0]$ (i.e. $\text{IV}_0 = \text{IV}_1$), we have:
+            $$C_0[i] \oplus C_1[i] = M_0[i] \oplus \text{E}(K, \text{IV}_0 + i) \oplus M_1[i] \oplus \text{E}(K, \text{IV}_1 + i) = M_0[i]  \oplus M_1[i] $$
+            If we apply $ C_0[i] \oplus C_1[i] =  M_0[i]  \oplus M_1[i]$ to each block, we have:
+            $$M_0 \oplus M_1 =  C_0 \oplus C_1$$
+
+            
+            Therefore, if the initialization vector for CTR mode collides, we can learn the value of the XOR of two plaintexts by XORing 
+            their ciphertexts.
        \end{answer}
     \end{part}
 
     \begin{part}
         \begin{answer}
+            By the encryption procedure of CBC mode, we know:
+            $$C_0[i] \leftarrow \text{E}(K, M_0[i] \oplus C_0[i - 1])$$
+            $$C_1[i] \leftarrow \text{E}(K, M_1[i] \oplus C_1[i - 1])$$
+            
+            Since $C_0[0] = C_1[0]$ (i.e. $\text{IV}_0 = \text{IV}_1$), we have:
+            $$C_0[1] \leftarrow \text{E}(K, M_0[1] \oplus C_0[0])$$
+            $$C_1[1] \leftarrow \text{E}(K, M_1[1] \oplus C_1[0])$$
            
+            As we can see, if $M_0 = M_0[1]M_0[2]...M_0[q] = M_1[1]M_1[2]M_1[q] = M_1$ we have:
+            $$C_0[1] = E(K, M_0[1] \oplus C_0[0]) = E(K, M_1[1] \oplus C_1[0]) = C_1[1]$$
+            $$C_0[2] = E(K, M_0[2] \oplus C_0[1]) = E(K, M_1[2] \oplus C_1[1]) = C_1[2]$$
+            $$...$$
+            $$C_0[q] = E(K, M_0[q] \oplus C_0[q-1]) = E(K, M_1[q] \oplus C_1[q-1]) = C_1[q]$$
+
+            
+            Therefore, when the initialization vector for CBC mode collides, we know that if two ciphertexts are the same, the two corresponding plaintexts are also the same. 
         \end{answer}
     \end{part}
    
@@ -193,13 +219,29 @@
 \begin{question}{Task 3 - IND-CPA Security (10 points)} 
     \begin{part}
        \begin{answer}
-       
+            Since we use PKCS\#7 to pad plaintext $M$ into 16-byte blocks, for plaintexts that are less than 16 bytes in length, we will only have one block of ciphertexts:
+            $$C_{M < 16 \text{ bytes}} \leftarrow R || \text{AES}(K, M[1] +1 + R)$$
+            Since every time we encrypt a new plaintext, we generate a random 16-byte mask $R$, the probability of having different masks for two different plaintexts is 
+            very high (i.e. $1 - 2^{-128}$).\\  
+            So for two plaintexts $M_0$ and $M_1$, the probability of $M_0[1] + 1 + R_0 = M_1[1] + 1 + R_1$ is very low (less than $2^{-128}$).\\
+            Because we assume AES is a good PRF, given $M_0[1] + 1 + R_0 \ne M_1[1] + 1 + R_1$, AES should return two blockciphers $C_0$ and $C_1$ which is as good as directly sampling two uniformly random 16-byte strings (effectively a one-time pad).\\
+            Therefore, we can't tell which ciphertext is the encryption of which plaintext, so the scheme is IND-CPA secure.
        \end{answer}
     \end{part}
 
     \begin{part}
         \begin{answer}
-           
+           Assume we pick two 32-byte long plaintexts $M_0$ and $M_1$ where after padding: 
+           $$M_0[1] + 1 = M_0[2] + 2$$
+           $$M_1[1] + 1 \ne M_1[2] + 2$$
+           By the encryption scheme, we will have the following ciphertexts:
+           $$C_0 \leftarrow R || \text{AES}(K,M_0[1] + 1 + R_0) ||  \text{AES}(K,M_0[2] + 2 + R_0)$$
+           $$C_1 \leftarrow R || \text{AES}(K,M_1[1] + 1 + R_1) ||  \text{AES}(K,M_1[2] + 2 + R_1)$$
+           Since AES is deterministic, and we picked $M_0[1] + 1 = M_0[2] + 2$ and $M_1[1] + 1 \ne M_1[2] + 2$, we know:
+           $$\text{AES}(K,M_0[1] + 1 + R_0) =  \text{AES}(K,M_0[2] + 2 + R_0)$$
+           $$\text{AES}(K,M_1[1] + 1 + R_1) \ne  \text{AES}(K,M_1[2] + 2 + R_1)$$
+           Base on this, we can construct a distinguisher which can distinguish $C_0$ and $C_1$ with probability 1 by checking if the second and third block of the ciphertext are the same.\\
+           Therefore, the scheme is not IND-CPA secure for plaintexts that are longer than 16 bytes. 
         \end{answer}
      \end{part}
 
@@ -210,7 +252,34 @@
 \begin{question}{Task 4 - Padding-Oracle Attack (22 points)}
     \begin{part}
        \begin{answer}
-        
+            \textbf{Case 1 (if the last byte of the last plaintext block is validly padded):} \\
+                For all possible guesses $X$: 
+                \begin{enumerate}
+                   \item Change the last byte $Y$ of the second-last ciphertext block to $X \oplus Y \oplus 01$ 
+                    \item Submit resulting ciphertext to padding oracle. If padding oracle says ciphertext has valid padding (we should only have one $X$ that satisfy this condition), take $X$ as the value of the last byte.
+                \end{enumerate}
+
+            \textbf{Case 2 (if the last byte of the last plaintext block is not validly padded):}\\
+                For all possible guesses  $X$ : 
+                \begin{enumerate}
+                    \item Change the last byte  $Y$  of the second-last ciphertext block to  $X \oplus Y \oplus 01$.
+                    \item Submit the resulting ciphertext to the padding oracle. If the padding oracle says the ciphertext has valid padding, make a note of this value of  $X$ .
+    
+                   After searching through all $X \in \{0,1\}^8$, we'll likely have identified two values  $X_1$  and  $X_2$  that satisfy the condition. \\\\
+                     \textit{[To show this, we can use the example in class: \\
+                    If the original plaintext is not padded correctly, let's say the last byte was $0B$, then after searching through all possible $X$'s, we will
+                    get two values that will achieve the two valid paddings:
+                    (i.)  $0A$ 
+                    (ii) $01$ \\\\}
+                    To find correct value between  $X_1$  and  $X_2$, we do the\\ following:
+    
+                    \item Change the second-last byte $Z$ of the second-last ciphertext block to a different random value (or we can simply flip the last bit of $Z$ ).
+                    \item Change the last byte $Y$ of the second-last ciphertext block to  $X_1 \oplus Y \oplus 01$.
+                    \item Submit this resulting ciphertext to the padding oracle.
+                    \item If the padding oracle says the ciphertext has valid padding, then $X_2$ is the correct value for the last 
+                        byte (because if $X_1$ was the correct value, changing the second-last byte $Z$ would have invalidated the padding). Otherwise, $X_1$ is the 
+                        correct value for the last byte (because it suggests the correct padding is just $01$, changing the second-last byte didn't break anything). 
+                \end{enumerate}
        \end{answer}
     \end{part}
 

@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023) (preloaded format=pdflatex 2023.3.31)  20 OCT 2023 22:45
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023) (preloaded format=pdflatex 2023.3.31)  25 OCT 2023 00:58
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -930,23 +930,42 @@ File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 File: mt-msb.cfg 2005/06/01 v1.0 microtype config. file: AMS symbols (b) (RS)
 ) [1
 
-{/usr/local/texlive/2023/texmf-var/fonts/map/pdftex/updmap/pdftex.map}] [2] [3] [4] (./hw3.aux)
+{/usr/local/texlive/2023/texmf-var/fonts/map/pdftex/updmap/pdftex.map}] [2{/usr/local/texlive/2023/texmf-dist/fonts/enc/dvips/lm/lm-mathit.enc}{/usr/local/texlive/2023/texmf-dist/fonts/enc/dvips/lm/lm-rm.enc}{/usr/local/texlive/2023/texmf-dist/fonts/enc/dvips/lm/lm-mathsy.enc}] [3]
+LaTeX Font Info:    Font shape `OT1/cmss/m/it' in size <10.95> not available
+(Font)              Font shape `OT1/cmss/m/sl' tried instead on input line 283.
+
+Underfull \hbox (badness 10000) in paragraph at lines 283--283
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 283--283
+
+ []
+
+
+Package varwidth Warning: Failed to reprocess entire contents on input line 283.
+
+
+Package varwidth Warning: Failed to reprocess entire contents on input line 283.
+
+[4] [5] (./hw3.aux)
 Package rerunfilecheck Info: File `hw3.out' has not changed.
 (rerunfilecheck)             Checksum: D41D8CD98F00B204E9800998ECF8427E;0.
  ) 
 Here is how much of TeX's memory you used:
- 54487 strings out of 476025
- 1328407 string characters out of 5790017
- 1946132 words of memory out of 5000000
- 74319 multiletter control sequences out of 15000+600000
- 525686 words of font info for 55 fonts, out of 8000000 for 9000
+ 54543 strings out of 476025
+ 1329011 string characters out of 5790017
+ 1959169 words of memory out of 5000000
+ 74331 multiletter control sequences out of 15000+600000
+ 527750 words of font info for 73 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 99i,5n,95p,1631b,541s stack positions out of 10000i,1000n,20000p,200000b,200000s
-</usr/local/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmss10.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmssbx10.pfb>
-Output written on hw3.pdf (4 pages, 27140 bytes).
+ 99i,8n,95p,1631b,541s stack positions out of 10000i,1000n,20000p,200000b,200000s
+</usr/local/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmss10.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmss8.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmssbx10.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmssi10.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/lm/lmmi10.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/lm/lmmi8.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/lm/lmr10.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/lm/lmr8.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/lm/lmsy10.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/lm/lmsy8.pfb>
+Output written on hw3.pdf (5 pages, 125891 bytes).
 PDF statistics:
- 38 PDF objects out of 1000 (max. 8388607)
- 27 compressed objects within 1 object stream
- 5 named destinations out of 1000 (max. 500000)
- 5645 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 96 PDF objects out of 1000 (max. 8388607)
+ 68 compressed objects within 1 object stream
+ 14 named destinations out of 1000 (max. 500000)
+ 11789 words of extra memory for PDF output out of 12000 (max. 10000000)
 
