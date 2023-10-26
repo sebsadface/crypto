@@ -42,3 +42,34 @@ with open(sys.argv[1], "rb") as ciphertext_file:
 # If you have multiple subsequences and would like to decode
 # without first concatenating all of them, you can use the
 # codecs library (https://docs.python.org/3/library/codecs.html).
+
+plaintext = bytearray()
+cipher_blocks = list()
+for i in range(0, len(ciphertext), 16):
+  cipher_blocks.append(ciphertext[i:i+16])
+
+for block in range(len(cipher_blocks) - 1, 0, -1):
+  current_cipher = cipher_blocks[block - 1] + cipher_blocks[block]
+  recovered_block = bytearray(16)
+
+  for byte in range(15, -1, -1):
+    target_padding_value = 16 - byte
+    valid_cipher_ending = bytearray() 
+
+    for i in range(1, target_padding_value):
+      valid_cipher_ending += bytearray.fromhex('{:02x}'.format(target_padding_value ^ recovered_block[byte + i]))
+
+    for i in range(0, 256):
+      x_xor_y = bytearray.fromhex('{:02x}'.format((i ^ current_cipher[byte])))
+      test_cipher = current_cipher[:byte] + x_xor_y + valid_cipher_ending + current_cipher[byte + 1 + target_padding_value - 1:]
+      validate_padding = test_cipher[:byte - 1] + bytearray.fromhex('{:02x}'.format((1 ^ test_cipher[byte])))  + test_cipher[byte:]
+      
+      if(PadOracle(test_cipher) and PadOracle(validate_padding)):
+        recovered_block = recovered_block[:byte] + bytearray.fromhex('{:02x}'.format(test_cipher[byte] ^ target_padding_value)) + recovered_block[byte + 1:]
+        plaintext = bytearray.fromhex('{:02x}'.format(i ^ target_padding_value)) + plaintext
+        break
+
+padding_num = plaintext[-1]
+original_message = plaintext[:-padding_num].decode("utf-8")
+
+print(original_message)

@@ -1,6 +1,6 @@
 # Fdb version 4
-["pdflatex"] 1698220712 "/Users/seb/GitRepos/crypto/hw3/hw3.tex" "hw3.pdf" "hw3" 1698220713 0
-  "/Users/seb/GitRepos/crypto/hw3/hw3.tex" 1698220712 12148 6a76343951e5c78a050a2c2998dcda9f ""
+["pdflatex"] 1698280550 "/Users/seb/GitRepos/crypto/hw3/hw3.tex" "hw3.pdf" "hw3" 1698280551 0
+  "/Users/seb/GitRepos/crypto/hw3/hw3.tex" 1698280550 14915 5c887648405dcc1dccf7c67babe48fed ""
   "/usr/local/texlive/2023/texmf-dist/fonts/enc/dvips/lm/lm-mathit.enc" 1202520719 2405 5dcf2c1b967ee25cc46c58cd52244aed ""
   "/usr/local/texlive/2023/texmf-dist/fonts/enc/dvips/lm/lm-mathsy.enc" 1202520719 2840 216e6e45ad352e2456e1149f28885bee ""
   "/usr/local/texlive/2023/texmf-dist/fonts/enc/dvips/lm/lm-rm.enc" 1202520719 2327 9d6df24f9c4f7368395224341a95523a ""
@@ -241,9 +241,9 @@
   "/usr/local/texlive/2023/texmf-var/fonts/map/pdftex/updmap/pdftex.map" 1680290493 4623355 b8cad38412faebe1ce5b780a45db67bd ""
   "/usr/local/texlive/2023/texmf-var/web2c/pdftex/pdflatex.fmt" 1680290465 7883478 b4f968cf20925cbdf48d0ff8d345dd65 ""
   "/usr/local/texlive/2023/texmf.cnf" 1678822455 577 1b2b1af17af2508fb20dd85783af4050 ""
-  "hw3.aux" 1698220713 554 1946bb2d40f231db7fb58bc3ffb28649 "pdflatex"
-  "hw3.out" 1698220713 0 d41d8cd98f00b204e9800998ecf8427e "pdflatex"
-  "hw3.tex" 1698220712 12148 6a76343951e5c78a050a2c2998dcda9f ""
+  "hw3.aux" 1698280551 554 1946bb2d40f231db7fb58bc3ffb28649 "pdflatex"
+  "hw3.out" 1698280551 0 d41d8cd98f00b204e9800998ecf8427e "pdflatex"
+  "hw3.tex" 1698280550 14915 5c887648405dcc1dccf7c67babe48fed ""
   (generated)
   "hw3.aux"
   "hw3.log"

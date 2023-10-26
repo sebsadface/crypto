@@ -249,7 +249,7 @@
 \end{question}
 
 %%%%%%%%%%%%%%%%%%%%%%%% Task 4 %%%%%%%%%%%%%%%%%%%%%%%%
-\begin{question}{Task 4 - Padding-Oracle Attack (22 points)}
+\begin{question}{Task 4 - Padding-Oracle Attack (22 points)} 
     \begin{part}
        \begin{answer}
             \textbf{Case 1 (if the last byte of the last plaintext block is validly padded):} \\
@@ -282,17 +282,45 @@
                 \end{enumerate}
        \end{answer}
     \end{part}
-
+\newpage
     \begin{part}
         \begin{answer}
-            
-        \end{answer}
-     \end{part}
+            \textbf{Strategy:}
+            \begin{enumerate}
+                \item Split the ciphertext $ C $ into blocks: $  C_0, C_1, ... C_n $ (target is to recover $P_1, P_2, ..., P_n$).
+                \item For each block $  C_i  $ starting from $  C_n  $ and moving to $  C_1  $:
+                     recover each byte in the block, starting from the last byte and moving to the first.
+                \item For each byte position in block $  C_i  $:\\
+                    Assume we have $C_i = [c_1, c_2, ... c_{16}]$ and we want to recover $P_i = [p_1, p_2, ... p_{16}]$.
+                    \begin{enumerate}
+                        \item Using the strategy described in part a) to recover the last byte of the last plaintext block ($p_{16}$).
+                        \item Recovering the second-last byte ($p_{15}$):\\
+                         The target is to change $C_i$ to $C_i'$ such that when decrypted, its last two bytes become $02 02$.
+                        \begin{enumerate}
+                            \item Change the already recovered last byte: $c_{16}' = c_{16} \oplus p_{16} \oplus 02$ (so the last byte will be decrypted to $02$). 
+                            \item For all possible guesses $X$:
+                            \begin{enumerate}
+                                \item Change the second-last byte: $c_{15}' = X \oplus c_{15} \oplus 02$.
+                                \item Submit resulting ciphertext $C_i' = [c_1, c_2, ..., c_{15}', c_{16}']$ to padding oracle.
+                                \item If padding oracle says ciphertext has valid padding, then $p_{15} = X $.
+                            \end{enumerate}
+                        \end{enumerate}
+                        \item Continue this process for each preceding byte:
+                            \begin{enumerate}
+                                \item For the 3rd last byte, target decryption of the last three bytes becomes $03 03 03$.
+                                \item For the 4th last byte, target decryption of the last four bytes becomes $04 04 04 04$.
+                                \item ... and so on.
+                            \end{enumerate}
+                        \item Once all bytes in $P_i$ are recovered, we move to the next block $P_{i - 1}$and use $C_{i-1}$ to recover it. 
+                    \end{enumerate}
+                \item Repeat step 3 for all blocks.
+                \item Once recovered the last block ($P_1$), we remove the PKCS\#7 padding from the final plaintext block to get the original message.
+            \end{enumerate}
 
-
-    \begin{part}
-        \begin{answer}
-            
+        \textbf{Number of padding validity checks:} \\
+        In the worst case scenario, for each byte position, we have to check $2^8 = 256$ possibilities.
+        Given a block size of $  b  $ bytes and $  n  $ blocks we need $ b \times 256 \times n $ checks in the worst case.
+   
         \end{answer}
      \end{part}
 
