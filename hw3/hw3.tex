@@ -161,15 +161,49 @@
 \begin{question}{Task 1 - Key Recovery (5 + 5 points)}
     \begin{part}
        \begin{answer}
-       
+        \begin{tabular}{|l|}
+            \hline
+                \underline{\textbf{oracle} $O^{\text{LR}_{b [\Pi]}}$:} \\
+                \underline{private \textbf{procedure} Init():}\\
+                $b  \overset{\text{\$}}{\leftarrow} \{0,1\}$\\\\
+                \underline{public \textbf{procedure} Eval($M_0, M_1$):}\\
+                $C \leftarrow \text{LR}_{b[\Pi]}.\text{Encrypt}(M_0, M_1)$ \\
+                \textbf{return} $C$ \\\\
+                \underline{private \textbf{procedure} Fin($K'$):}\\
+                $M'  \overset{\text{\$}}{\leftarrow} \mathcal{M}$\\
+                $C' \leftarrow \text{LR}_{b[\Pi]}.\text{Encrypt}(M', M')$ \\
+                $M'' \leftarrow \text{Dec}(K', M')$\\
+                \textbf{if} $M'' = M'$ \textbf{return} $1$ \textbf{else} \textbf{return} $0$ \\
+                \hline
+            \end{tabular}\\\\
+            Given the oracle $ O^{\text{LR}_{b [\Pi]}} $ described, we can construct a distinguisher $ \mathsf{D} $ to distinguish whether the oracle's behavior
+            corresponds to left or right oracle with the help of $\mathsf{A}$.
+
+            Distinguisher $ \mathsf{D} $ does the following:
+            \begin{enumerate}
+                \item $ \mathsf{D} $ chooses two messages $ M_0 = 0^{l}$ and $ M_1 = 1^l $.
+    
+                \item $ \mathsf{D} $ queries $ O^{\text{LR}_{b [\Pi]}} $'s Eval procedure with $ M_0 $ and $ M_1 $ to receive ciphertexts.
+    
+                \item $ \mathsf{D} $ then queries $ \mathsf{A} $ to get a key $ K' $ based on the received ciphertexts.
+    
+                \item Using the key $ K' $, $ \mathsf{D} $ call $ O^{\text{LR}_{b [\Pi]}} $'s Fin procedure and receives a response, which is either 1 or 0.
+    
+                \item If the output is 1, $ \mathsf{D} $ return $ 0 $, $\mathsf{D}$ otherwise return $1$. 
+            \end{enumerate}
+
+            If $ b = 0 $, then the $ \text{LR}_{b[\Pi]} $ oracle will always encrypt the first message. 
+            So, if $ \mathsf{A} $ has a high key recovery advantage, the key $ K' $ it produces be the correct one. 
+            When $ \mathsf{D} $ queries the Fin procedure, the decryption of $ C' $ using $ K' $ result in $ M' $, leading the oracle to return 1.\\
+
+            If $ b = 1 $, then the $ \text{LR}_{b[\Pi]} $ oracle will always encrypt the second message.
+             Given $ \mathsf{A} $'s advantage, the key $ K' $ will not be the correct one for the $ b = 0 $ case. When $ \mathsf{D} $
+            queries the Fin procedure, the decryption of $ C' $ using $ K' $ will  not result in $ M' $, leading the oracle to return 0.\\
+
+            Thus, $\text{Adv}_\Pi^{\text{ind-cpa}}(D) = 1$
         \end{answer}
     \end{part}
 
-    \begin{part}
-        \begin{answer}
-
-        \end{answer}
-     \end{part}
 \end{question}
 
 %%%%%%%%%%%%%%%%%%%%%%%% Task 2 %%%%%%%%%%%%%%%%%%%%%%%%

@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023) (preloaded format=pdflatex 2023.3.31)  25 OCT 2023 17:35
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023) (preloaded format=pdflatex 2023.3.31)  25 OCT 2023 23:44
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -893,91 +893,154 @@ File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Live
 File: fc-english.def 2016/01/12
 )
 \c@lstlisting=\count408
-LaTeX Font Info:    Trying to load font information for OT1+lmr on input line 165.
+LaTeX Font Info:    Trying to load font information for OT1+lmr on input line 204.
  (/usr/local/texlive/2023/texmf-dist/tex/latex/lm/ot1lmr.fd
 File: ot1lmr.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 ) (/usr/local/texlive/2023/texmf-dist/tex/latex/microtype/mt-cmr.cfg
 File: mt-cmr.cfg 2013/05/19 v2.2 microtype config. file: Computer Modern Roman (RS)
 )
-LaTeX Font Info:    Trying to load font information for OML+lmm on input line 165.
+LaTeX Font Info:    Trying to load font information for OML+lmm on input line 204.
  (/usr/local/texlive/2023/texmf-dist/tex/latex/lm/omllmm.fd
 File: omllmm.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 )
-LaTeX Font Info:    Trying to load font information for OMS+lmsy on input line 165.
+LaTeX Font Info:    Trying to load font information for OMS+lmsy on input line 204.
  (/usr/local/texlive/2023/texmf-dist/tex/latex/lm/omslmsy.fd
 File: omslmsy.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 )
-LaTeX Font Info:    Trying to load font information for OMX+lmex on input line 165.
+LaTeX Font Info:    Trying to load font information for OMX+lmex on input line 204.
  (/usr/local/texlive/2023/texmf-dist/tex/latex/lm/omxlmex.fd
 File: omxlmex.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 )
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <10.95> on input line 165.
+(Font)              <10.95> on input line 204.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <8> on input line 165.
+(Font)              <8> on input line 204.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <6> on input line 165.
-LaTeX Font Info:    Trying to load font information for U+msa on input line 165.
+(Font)              <6> on input line 204.
+LaTeX Font Info:    Trying to load font information for U+msa on input line 204.
  (/usr/local/texlive/2023/texmf-dist/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 ) (/usr/local/texlive/2023/texmf-dist/tex/latex/microtype/mt-msa.cfg
 File: mt-msa.cfg 2006/02/04 v1.1 microtype config. file: AMS symbols (a) (RS)
 )
-LaTeX Font Info:    Trying to load font information for U+msb on input line 165.
+LaTeX Font Info:    Trying to load font information for U+msb on input line 204.
  (/usr/local/texlive/2023/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 ) (/usr/local/texlive/2023/texmf-dist/tex/latex/microtype/mt-msb.cfg
 File: mt-msb.cfg 2005/06/01 v1.0 microtype config. file: AMS symbols (b) (RS)
-) [1
+)
+LaTeX Font Info:    Trying to load font information for TS1+cmss on input line 204.
+ (/usr/local/texlive/2023/texmf-dist/tex/latex/base/ts1cmss.fd
+File: ts1cmss.fd 2022/07/10 v2.5l Standard LaTeX font definitions
+)
+Package microtype Info: Loading generic protrusion settings for font family
+(microtype)             `cmss' (encoding: TS1).
+(microtype)             For optimal results, create family-specific settings.
+(microtype)             See the microtype manual for details.
+LaTeX Font Info:    Trying to load font information for OT1+lmss on input line 204.
+ (/usr/local/texlive/2023/texmf-dist/tex/latex/lm/ot1lmss.fd
+File: ot1lmss.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
+)
+Package microtype Info: Loading generic protrusion settings for font family
+(microtype)             `lmss' (encoding: OT1).
+(microtype)             For optimal results, create family-specific settings.
+(microtype)             See the microtype manual for details.
 
-{/usr/local/texlive/2023/texmf-var/fonts/map/pdftex/updmap/pdftex.map}] [2{/usr/local/texlive/2023/texmf-dist/fonts/enc/dvips/lm/lm-mathit.enc}{/usr/local/texlive/2023/texmf-dist/fonts/enc/dvips/lm/lm-rm.enc}{/usr/local/texlive/2023/texmf-dist/fonts/enc/dvips/lm/lm-mathsy.enc}] [3]
+Underfull \hbox (badness 10000) in paragraph at lines 204--204
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 204--204
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 204--204
+
+ []
+
+
+Package varwidth Warning: Failed to reprocess entire contents on input line 204.
+
+
+Underfull \hbox (badness 10000) detected at line 204
+
+ []
+
+
+Overfull \hbox (3.08092pt too wide) detected at line 204
+\OT1/cmss/m/n/10.95 (+20) key $\OML/lmm/m/it/10.95 K[]$ \OT1/cmss/m/n/10.95 (+20) will not be the cor-rect one for the $\OML/lmm/m/it/10.95 b \OT1/lmr/m/n/10.95 = 0$ \OT1/cmss/m/n/10.95 (+20) case. When $\OT1/lmss/m/n/10.95 (+20) D$ \OT1/cmss/m/n/10.95 (+20) queries the Fin pro-ce-dure, the
+ []
+
+
+Overfull \hbox (12.92262pt too wide) detected at line 204
+[]\OT1/cmss/m/n/10.95 (-20) If $\OML/lmm/m/it/10.95 b \OT1/lmr/m/n/10.95 = 1$\OT1/cmss/m/n/10.95 (-20) , then the $[][]$ or-a-cle will al-ways en-crypt the sec-ond mes-sage. Given $\OT1/lmss/m/n/10.95 (-20) A$\OT1/cmss/m/n/10.95 (-20) 's ad-van-tage, the
+ []
+
+
+Underfull \hbox (badness 10000) detected at line 204
+
+ []
+
+
+Overfull \hbox (16.80191pt too wide) detected at line 204
+\OT1/cmss/m/n/10.95 (-20) re-cov-ery ad-van-tage, the key $\OML/lmm/m/it/10.95 K[]$ \OT1/cmss/m/n/10.95 (-20) it pro-duces be the cor-rect one. When $\OT1/lmss/m/n/10.95 (-20) D$ \OT1/cmss/m/n/10.95 (-20) queries the Fin pro-ce-dure,
+ []
+
+
+Package varwidth Warning: Failed to reprocess entire contents on input line 204.
+
+[1
+
+{/usr/local/texlive/2023/texmf-var/fonts/map/pdftex/updmap/pdftex.map}{/usr/local/texlive/2023/texmf-dist/fonts/enc/dvips/lm/lm-mathit.enc}{/usr/local/texlive/2023/texmf-dist/fonts/enc/dvips/lm/lm-rm.enc}{/usr/local/texlive/2023/texmf-dist/fonts/enc/dvips/cm-super/cm-super-ts1.enc}{/usr/local/texlive/2023/texmf-dist/fonts/enc/dvips/lm/lm-mathsy.enc}] [2] [3]
 LaTeX Font Info:    Font shape `OT1/cmss/m/it' in size <10.95> not available
-(Font)              Font shape `OT1/cmss/m/sl' tried instead on input line 283.
+(Font)              Font shape `OT1/cmss/m/sl' tried instead on input line 317.
 
-Underfull \hbox (badness 10000) in paragraph at lines 283--283
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 283--283
+Underfull \hbox (badness 10000) in paragraph at lines 317--317
 
  []
 
 
-Package varwidth Warning: Failed to reprocess entire contents on input line 283.
+Underfull \hbox (badness 10000) in paragraph at lines 317--317
+
+ []
 
 
-Package varwidth Warning: Failed to reprocess entire contents on input line 283.
+Package varwidth Warning: Failed to reprocess entire contents on input line 317.
+
+
+Package varwidth Warning: Failed to reprocess entire contents on input line 317.
 
 [4]
 
-Package varwidth Warning: Failed to reprocess entire contents on input line 324.
+Package varwidth Warning: Failed to reprocess entire contents on input line 358.
 
 
-Overfull \hbox (10.57115pt too wide) detected at line 324
+Overfull \hbox (10.57115pt too wide) detected at line 358
 \OT1/cmss/m/n/10.95 (-11) In the worst case scenario, for each byte position, we have to check $\OT1/lmr/m/n/10.95 2[] = 256$ \OT1/cmss/m/n/10.95 (-11) possibilities. Given
  []
 
 
-Package varwidth Warning: Failed to reprocess entire contents on input line 324.
+Package varwidth Warning: Failed to reprocess entire contents on input line 358.
 
 [5] (./hw3.aux)
 Package rerunfilecheck Info: File `hw3.out' has not changed.
 (rerunfilecheck)             Checksum: D41D8CD98F00B204E9800998ECF8427E;0.
  ) 
 Here is how much of TeX's memory you used:
- 54565 strings out of 476025
- 1329168 string characters out of 5790017
- 1962176 words of memory out of 5000000
- 74330 multiletter control sequences out of 15000+600000
- 527945 words of font info for 76 fonts, out of 8000000 for 9000
+ 54666 strings out of 476025
+ 1331106 string characters out of 5790017
+ 1967372 words of memory out of 5000000
+ 74387 multiletter control sequences out of 15000+600000
+ 538108 words of font info for 95 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 99i,8n,95p,1631b,782s stack positions out of 10000i,1000n,20000p,200000b,200000s
-</usr/local/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmss10.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmss8.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmssbx10.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmssi10.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/lm/lmmi10.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/lm/lmmi8.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/lm/lmr10.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/lm/lmr8.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/lm/lmsy10.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/lm/lmsy8.pfb>
-Output written on hw3.pdf (5 pages, 132494 bytes).
+ 99i,18n,95p,1631b,782s stack positions out of 10000i,1000n,20000p,200000b,200000s
+</usr/local/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmss10.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmss8.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmssbx10.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmssi10.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/lm/lmmi10.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/lm/lmmi6.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/lm/lmmi8.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/lm/lmr10.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/lm/lmr6.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/lm/lmr8.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/lm/lmss10.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/lm/lmsy10.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/lm/lmsy8.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/cm-super/sfss0800.pfb>
+Output written on hw3.pdf (5 pages, 178666 bytes).
 PDF statistics:
- 116 PDF objects out of 1000 (max. 8388607)
- 88 compressed objects within 1 object stream
- 31 named destinations out of 1000 (max. 500000)
- 11789 words of extra memory for PDF output out of 12000 (max. 10000000)
+ 143 PDF objects out of 1000 (max. 8388607)
+ 106 compressed objects within 2 object streams
+ 36 named destinations out of 1000 (max. 500000)
+ 24077 words of extra memory for PDF output out of 24883 (max. 10000000)
 
