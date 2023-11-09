@@ -193,14 +193,16 @@
         \begin{answer}
             The main observation is that the E\&M scheme produces identical tags for the same plaintexts since SHA-256 is deterministic.
             Let $\Pi = (\text{Kg}, \text{Enc}, \text{Dec})$
-            be the encryption scheme E\&M, We can construct an adversary against $\Pi$ in the following way:  \\
+            be the encryption scheme E\&M, We can construct an adversary against $\Pi$ in the following way:
+            \begin{center}
             \begin{tabular}{l}
                     \underline{\textbf{adversary} $A^{O}()$:} \\
                     $C'_1[0]C'_1[1]...C'_1[\ell]\;||\;T_1 \leftarrow O.\text{Encrypt}(0^{n \cdot \ell})$ \\
                     $C'_2[0]C'_2[1]...C'_2[2\ell]\;||\;T_2 \leftarrow O.\text{Encrypt}(0^{n \cdot 2\ell})$ \\
                     $C^* = C'_2[0]C'_2[1]...C'_2[\ell] \;||\;T_1$ \\
                     \textbf{return} $C^*$
-                \end{tabular}\\\\\\
+                \end{tabular}
+            \end{center}
                 Consider the INT-CTXT oracle. When running $\text{A}^{\text{INT-CTXT}[E\&M]}$, for the adversary to succeed, 
                 two things need to be satisfied:
                 $(1)\; C^* \notin \mathcal{Q}$, and $(2)\;\text{Dec}(K, C^*) \ne \bot$. \\
@@ -220,7 +222,7 @@
                     \text{Adv}_{\Pi}^{\text{int-ctxt}}(A) &= \Pr[\text{A}^{\text{INT-CTXT}[\Pi]} \Rightarrow 1] \\
                     &= \Pr[ C^* \notin \mathcal{Q} \wedge \text{Dec}(K, C^*) \ne \bot] = 1,
                 \end{align*}
-                and since $A$ returns in polynomial time, this means $\Pi$ is not INT-CTXT secure.\\\\
+                and since $A$ returns in polynomial time, this means $\Pi$ is not INT-CTXT secure.
                 
         \end{answer}
      \end{part}
@@ -231,12 +233,93 @@
 \begin{question}{Task 2 - Authenticated Encryption (15 points)}
     \begin{part}
        \begin{answer}
-        
-       \end{answer}
+         \textbf{The scheme doesn't guarantee ciphertext integrity.} \\
+         \textbf{Explanation:}\\
+            The main observation is that the encryption scheme ensures the integrity of the decrypted plaintext by XORing
+            all plaintext blocks. Since counter-mode encryption is malleable, two bit-flips at the same index in different
+            blocks will cancel each other out. This allows us to construct ciphertexts that will pass the integrity check
+            but differ from the original ciphertext. Let $\Pi = (\text{Kg}, \text{Enc}, \text{Dec})$ be the AES-based CTR encryption
+                scheme described in the question. We can construct an adversary against $\Pi$ as follows:
+            \begin{center}
+             \begin{tabular}{l}
+                    \underline{\textbf{adversary} $A^{O}()$:} \\
+                    $C[0]||C[1]||C[2]||C[3]||C[4] \leftarrow O.\text{Encrypt}(0^{256})$ \\
+                    $C^*[1] \leftarrow C[1] \text{ with the first bit flipped}$\\
+                    $C^*[2] \leftarrow C[2] \text{ with the first bit flipped}$ \\
+                    
+                    $C^* = C[0] || C^*[1] || C^*[2] || C[3] || C[4]$ \\
+                    \textbf{return} $C^*$
+                \end{tabular}
+            \end{center}
+            Consider the INT-CTXT oracle. When running $\text{A}^{\text{INT-CTXT}[\Pi]}$, for the adversary to succeed, two 
+            conditions must be met: (1) $C^* \notin \mathcal{Q}$, and (2) $\text{Dec}(K, C^*) \neq \bot$. \\\\
+            Firstly, the oracle's state is $\mathcal{Q} = \{C\}$, where $C = C[0]||C[1]||C[2]||C[3]||C[4]$ from 
+            $\text{Enc}(K, 0^{256})$. Given the 256-bit plaintext and 128-bit block size, we know that $C[0]$ is the 
+            initialization vector, $C[1]$ and $C[2]$ are the encrypted plaintext blocks, $C[3]$ is the padding block, 
+            and $C[4]$ is the additional integrity checking block. As $C^*$ has the first bits of $C[1]$ and $C[2]$ flipped, 
+            it is clear that $C \neq C^*$, and thus, $C^* \notin \mathcal{Q}$.\\\\\
+            Secondly, by the construction of the encryption scheme, $\text{Dec}(K, C^*)$ recovers $M^*[1], M^*[2], M[3], M[4]$ 
+            from $C^*$ in counter mode. Due to the malleability of counter mode, the first bit of $M^*[1]$ and $M^*[2]$ will 
+            be flipped compared to the original plaintext blocks $M[1]$ and $M[2]$. However, since the flips occur at the 
+            same position, $M^*[1] \oplus M^*[2] \oplus M[3] = M[1] \oplus M[2] \oplus M[3] = M[4]$. Since the padding 
+            block $M[3]$ is unchanged, $M^*[1], M^*[2], M[3]$ will pass the padding validation. Therefore, $\text{Dec}(K, C^*)$ 
+            returns $M \neq \bot$.
+            
+            In conclusion, the adversary's advantage is computed as
+            \begin{align*}
+                \text{Adv}_{\Pi}^{\text{int-ctxt}}(A) &= \Pr[\text{A}^{\text{INT-CTXT}[\Pi]} \Rightarrow 1] \\
+                &= \Pr[ C^* \notin \mathcal{Q} \wedge \text{Dec}(K, C^*) \neq \bot] = 1,
+            \end{align*}
+            which indicates that $\Pi$ is not INT-CTXT secure since $A$ operates in polynomial time.
+        \end{answer}
     \end{part}
-
+\newpage
     \begin{part}
         \begin{answer}
+            \textbf{The modified scheme still doesn't satisfy ciphertext integrity.} \\
+            \textbf{Explanation:}\\
+            The main observation is that the modified scheme remains vulnerable 
+            to malleability under counter mode encryption. Flipping the same bit in two 
+            different blocks of the plaintext will not change the result of the XOR operation. Since AES is A
+            deterministic function, an adversary can still produce a modified ciphertext that, when decrypted, 
+            still passes the integrity check.
+
+            Consider the modified AES-based CTR encryption scheme $\Pi' = (\text{Kg'}, \text{Enc'}, \text{Dec'})$ with an 
+            added integrity check, where the last ciphertext block is computed as 
+            $C[\ell + 1] = \text{AES}_K (\text{IV} \oplus M[1] \oplus \cdots \oplus M[\ell])$. 
+            We can reuse the adversary from part (a) against the integrity of $\Pi'$ as follows:
+            \begin{center}
+            \begin{tabular}{l}
+                \underline{\textbf{adversary} $A^{O'}()$:} \\
+                $C[0]||C[1]||C[2]||C[3]||C[4] \leftarrow O'.\text{Encrypt}(0^{256})$ \\
+                $C^*[1] \leftarrow C[1] \text{ with the first bit flipped}$\\
+                $C^*[2] \leftarrow C[2] \text{ with the first bit flipped}$ \\
+                
+                $C^* = C[0] || C^*[1] || C^*[2] || C[3] || C[4]$ \\
+                \textbf{return} $C^*$
+            \end{tabular}
+            \end{center}
+
+            Consider the INT-CTXT security definition. For adversary $A$ to succeed against the integrity of $\Pi'$, 
+            two conditions must be satisfied: $(1)\; C^* \notin \mathcal{Q}$, and $(2)\; \text{Dec'}(K, C^*) \ne \bot$. \\\\
+
+            Firstly, same as in part(a), since $C^*$ has the first bits of $C[1]$ and $C[2]$ flipped, we have \(C \ne C^*\), and thus, 
+            \(C^* \notin \mathcal{Q}\).\\\\
+
+            Secondly, $\text{Dec'}(K, C^*)$ first recovers $M^*[1],M^*[2],M[3]$ from $C^*$. 
+            Due to the malleability of counter mode, the first bit of $M^*[1]$ and $M^*[2]$ are flipped 
+            from the original plaintext blocks $M[1]$ and $M[2]$. However, the bit flips in $M^*[1]$ and $M^*[2]$
+             cancel out in the XOR operation used for integrity check. Thus,
+              $$\text{AES}_K (\text{IV} \oplus M^*[1] \oplus M^*[2] \oplus M[3]) = \text{AES}_K (\text{IV} \oplus M[1] \oplus M[2] \oplus M[3]) = C[4]$$ Since the padding block
+               $M[3]$ remains unchanged, $M^*[1],M^*[2],M[3]$ will pass the padding and integrity checks. Therefore,
+                $\text{Dec'}(K, C^*)$ returns $M \ne \bot$.
+
+            In conclusion, the advantage of the adversary $A$ in breaking the integrity of $\Pi'$ is:
+            \begin{align*}
+                \text{Adv}_{\Pi'}^{\text{int-ctxt}}(A) &= \Pr[\text{A}^{\text{INT-CTXT}[\Pi']} \Rightarrow 1] \\
+                &= \Pr[ C^* \notin \mathcal{Q} \wedge \text{Dec'}(K, C^*) \ne \bot] = 1,
+            \end{align*}
+            and since $A$ operates in polynomial time, this implies that $\Pi'$ is not INT-CTXT secure under this modified scheme.
 
         \end{answer}
     \end{part}

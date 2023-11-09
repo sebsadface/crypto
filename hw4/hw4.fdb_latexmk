@@ -1,6 +1,6 @@
 # Fdb version 4
-["pdflatex"] 1699433300 "/Users/seb/GitRepos/crypto/hw4/hw4.tex" "hw4.pdf" "hw4" 1699433301 0
-  "/Users/seb/GitRepos/crypto/hw4/hw4.tex" 1699433299 15717 d19f97839784e14a30cdacbc76e307b8 ""
+["pdflatex"] 1699515983 "/Users/seb/GitRepos/crypto/hw4/hw4.tex" "hw4.pdf" "hw4" 1699515984 0
+  "/Users/seb/GitRepos/crypto/hw4/hw4.tex" 1699515983 22085 d1526942c51f6166e15644c6b9f92b57 ""
   "/usr/local/texlive/2023/texmf-dist/fonts/enc/dvips/lm/lm-mathit.enc" 1202520719 2405 5dcf2c1b967ee25cc46c58cd52244aed ""
   "/usr/local/texlive/2023/texmf-dist/fonts/enc/dvips/lm/lm-mathsy.enc" 1202520719 2840 216e6e45ad352e2456e1149f28885bee ""
   "/usr/local/texlive/2023/texmf-dist/fonts/enc/dvips/lm/lm-rm.enc" 1202520719 2327 9d6df24f9c4f7368395224341a95523a ""
@@ -35,6 +35,7 @@
   "/usr/local/texlive/2023/texmf-dist/fonts/type1/public/lm/lmr8.pfb" 1255129361 122174 a7a08406857c9530a0320a2517f60370 ""
   "/usr/local/texlive/2023/texmf-dist/fonts/type1/public/lm/lmss10.pfb" 1255129361 97408 f595704ec2a07246c2d6f7b602587452 ""
   "/usr/local/texlive/2023/texmf-dist/fonts/type1/public/lm/lmsy10.pfb" 1254269338 27863 09ce3735688ffde955e72da27c95b61a ""
+  "/usr/local/texlive/2023/texmf-dist/fonts/type1/public/lm/lmsy6.pfb" 1254269338 28109 6d61305ed3d0eb794ebe36f15cf44aa0 ""
   "/usr/local/texlive/2023/texmf-dist/fonts/type1/public/lm/lmsy8.pfb" 1254269338 27802 5c876bb2c4040caaf035d60bd74a86bd ""
   "/usr/local/texlive/2023/texmf-dist/tex/context/base/mkii/supp-pdf.mkii" 1461363279 71627 94eb9990bed73c364d7f53f960cc8c5b ""
   "/usr/local/texlive/2023/texmf-dist/tex/generic/atbegshi/atbegshi.sty" 1575674566 24708 5584a51a7101caf7e6bbf1fc27d8f7b1 ""
@@ -244,9 +245,9 @@
   "/usr/local/texlive/2023/texmf-var/fonts/map/pdftex/updmap/pdftex.map" 1680290493 4623355 b8cad38412faebe1ce5b780a45db67bd ""
   "/usr/local/texlive/2023/texmf-var/web2c/pdftex/pdflatex.fmt" 1680290465 7883478 b4f968cf20925cbdf48d0ff8d345dd65 ""
   "/usr/local/texlive/2023/texmf.cnf" 1678822455 577 1b2b1af17af2508fb20dd85783af4050 ""
-  "hw4.aux" 1699433301 554 1946bb2d40f231db7fb58bc3ffb28649 "pdflatex"
-  "hw4.out" 1699433301 0 d41d8cd98f00b204e9800998ecf8427e "pdflatex"
-  "hw4.tex" 1699433299 15717 d19f97839784e14a30cdacbc76e307b8 ""
+  "hw4.aux" 1699515984 554 199b5e648f89bced0dfadf827c38c11c "pdflatex"
+  "hw4.out" 1699515984 0 d41d8cd98f00b204e9800998ecf8427e "pdflatex"
+  "hw4.tex" 1699515983 22085 d1526942c51f6166e15644c6b9f92b57 ""
   "merkle.png" 1699430224 165280 c9754a1e170b486beb310013dfe12ac6 ""
   (generated)
   "hw4.aux"

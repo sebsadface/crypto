@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023) (preloaded format=pdflatex 2023.3.31)  8 NOV 2023 00:48
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023) (preloaded format=pdflatex 2023.3.31)  8 NOV 2023 23:46
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -991,117 +991,77 @@ Underfull \hbox (badness 10000) detected at line 189
 [1
 
 {/usr/local/texlive/2023/texmf-var/fonts/map/pdftex/updmap/pdftex.map}{/usr/local/texlive/2023/texmf-dist/fonts/enc/dvips/lm/lm-mathit.enc}{/usr/local/texlive/2023/texmf-dist/fonts/enc/dvips/lm/lm-rm.enc}]
-Underfull \hbox (badness 10000) in paragraph at lines 225--225
+Underfull \hbox (badness 10000) in paragraph at lines 227--227
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 225--225
+Underfull \hbox (badness 10000) in paragraph at lines 227--227
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 225--225
+Underfull \hbox (badness 10000) detected at line 227
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 225--225
+Underfull \hbox (badness 10000) detected at line 227
+
+ []
+
+[2{/usr/local/texlive/2023/texmf-dist/fonts/enc/dvips/lm/lm-mathsy.enc}]
+Underfull \hbox (badness 10000) in paragraph at lines 274--274
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 225--225
+Underfull \hbox (badness 10000) in paragraph at lines 274--274
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 225--225
+Underfull \hbox (badness 10000) in paragraph at lines 274--274
+\OT1/cmss/m/n/10.95 (+20) Sec-ondly, by the con-struc-tion of the en-cryp-tion scheme, $[]\OT1/lmr/m/n/10.95 (\OML/lmm/m/it/10.95 K; C[]\OT1/lmr/m/n/10.95 )$ \OT1/cmss/m/n/10.95 (+20) re-cov-ers
+ []
+
+
+Underfull \hbox (badness 1314) in paragraph at lines 274--274
+\OT1/cmss/m/n/10.95 (+20) text blocks $\OML/lmm/m/it/10.95 M\OT1/lmr/m/n/10.95 [1]$ \OT1/cmss/m/n/10.95 (+20) and $\OML/lmm/m/it/10.95 M\OT1/lmr/m/n/10.95 [2]$\OT1/cmss/m/n/10.95 (+20) . How-ever, since the flips oc-cur at the same po-si-tion,
+ []
+
+
+Underfull \hbox (badness 1226) detected at line 274
+\OT1/cmss/m/n/10.95 (+20) text blocks $\OML/lmm/m/it/10.95 M\OT1/lmr/m/n/10.95 [1]$ \OT1/cmss/m/n/10.95 (+20) and $\OML/lmm/m/it/10.95 M\OT1/lmr/m/n/10.95 [2]$\OT1/cmss/m/n/10.95 (+20) . How-ever, since the flips oc-cur at the same po-si-tion,
+ []
+
+
+Underfull \hbox (badness 10000) detected at line 274
+\OT1/cmss/m/n/10.95 (+20) Sec-ondly, by the con-struc-tion of the en-cryp-tion scheme, $[]\OT1/lmr/m/n/10.95 (\OML/lmm/m/it/10.95 K; C[]\OT1/lmr/m/n/10.95 )$ \OT1/cmss/m/n/10.95 (+20) re-cov-ers
+ []
+
+
+Underfull \hbox (badness 10000) detected at line 274
 
  []
 
 
-Underfull \hbox (badness 10000) detected at line 225
+Underfull \hbox (badness 10000) detected at line 274
+
+ []
+
+[3]
+Underfull \hbox (badness 10000) in paragraph at lines 324--324
 
  []
 
 
-Underfull \hbox (badness 10000) detected at line 225
+Underfull \hbox (badness 10000) in paragraph at lines 324--324
 
  []
 
 
-Underfull \hbox (badness 10000) detected at line 225
-
- []
-
-
-Underfull \hbox (badness 10000) detected at line 225
-
- []
-
-
-Underfull \hbox (badness 10000) detected at line 225
-
- []
-
-
-Underfull \hbox (badness 10000) detected at line 225
-
- []
-
-[2{/usr/local/texlive/2023/texmf-dist/fonts/enc/dvips/lm/lm-mathsy.enc}] [3]
-<merkle.png, id=29, 2211.26125pt x 1168.365pt>
-File: merkle.png Graphic file (type png)
-<use merkle.png>
-Package pdftex.def Info: merkle.png  used on input line 272.
-(pdftex.def)             Requested size: 350.767pt x 185.31989pt.
-
-Underfull \hbox (badness 10000) in paragraph at lines 272--272
-
- []
-
-
-Underfull \hbox (badness 10000) detected at line 272
-
- []
-
-[4 <./merkle.png>]
-LaTeX Font Info:    Trying to load font information for OT1+lmss on input line 285.
- (/usr/local/texlive/2023/texmf-dist/tex/latex/lm/ot1lmss.fd
-File: ot1lmss.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
-)
-Package microtype Info: Loading generic protrusion settings for font family
-(microtype)             `lmss' (encoding: OT1).
-(microtype)             For optimal results, create family-specific settings.
-(microtype)             See the microtype manual for details.
-
-Underfull \hbox (badness 10000) in paragraph at lines 305--305
-
- []
-
-
-Overfull \hbox (11.67667pt too wide) in paragraph at lines 305--305
-[] 
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 305--305
-
- []
-
-
-Underfull \hbox (badness 10000) detected at line 305
-
- []
-
-
-Overfull \hbox (11.67667pt too wide) detected at line 305
-[] 
- []
-
-
-Underfull \hbox (badness 10000) detected at line 305
+Underfull \hbox (badness 10000) in paragraph at lines 324--324
 
  []
 
@@ -1115,23 +1075,103 @@ Underfull \hbox (badness 10000) detected at line 324
 
  []
 
-[5] (./hw4.aux)
+
+Underfull \hbox (badness 10000) detected at line 324
+
+ []
+
+
+Underfull \hbox (badness 10000) detected at line 324
+
+ []
+
+
+Underfull \hbox (badness 10000) detected at line 324
+
+ []
+
+[4]
+<merkle.png, id=34, 2211.26125pt x 1168.365pt>
+File: merkle.png Graphic file (type png)
+<use merkle.png>
+Package pdftex.def Info: merkle.png  used on input line 355.
+(pdftex.def)             Requested size: 350.767pt x 185.31989pt.
+
+Underfull \hbox (badness 10000) in paragraph at lines 355--355
+
+ []
+
+
+Underfull \hbox (badness 10000) detected at line 355
+
+ []
+
+[5 <./merkle.png>]
+LaTeX Font Info:    Trying to load font information for OT1+lmss on input line 368.
+ (/usr/local/texlive/2023/texmf-dist/tex/latex/lm/ot1lmss.fd
+File: ot1lmss.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
+)
+Package microtype Info: Loading generic protrusion settings for font family
+(microtype)             `lmss' (encoding: OT1).
+(microtype)             For optimal results, create family-specific settings.
+(microtype)             See the microtype manual for details.
+
+Underfull \hbox (badness 10000) in paragraph at lines 388--388
+
+ []
+
+
+Overfull \hbox (11.67667pt too wide) in paragraph at lines 388--388
+[] 
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 388--388
+
+ []
+
+
+Underfull \hbox (badness 10000) detected at line 388
+
+ []
+
+
+Overfull \hbox (11.67667pt too wide) detected at line 388
+[] 
+ []
+
+
+Underfull \hbox (badness 10000) detected at line 388
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 407--407
+
+ []
+
+
+Underfull \hbox (badness 10000) detected at line 407
+
+ []
+
+[6] (./hw4.aux)
 Package rerunfilecheck Info: File `hw4.out' has not changed.
 (rerunfilecheck)             Checksum: D41D8CD98F00B204E9800998ECF8427E;0.
  ) 
 Here is how much of TeX's memory you used:
- 54589 strings out of 476025
- 1329950 string characters out of 5790017
- 1976942 words of memory out of 5000000
+ 54606 strings out of 476025
+ 1330090 string characters out of 5790017
+ 1976969 words of memory out of 5000000
  74370 multiletter control sequences out of 15000+600000
- 535859 words of font info for 79 fonts, out of 8000000 for 9000
+ 536379 words of font info for 87 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  99i,18n,95p,1631b,541s stack positions out of 10000i,1000n,20000p,200000b,200000s
-</usr/local/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmss10.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmss8.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmssbx10.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/lm/lmmi10.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/lm/lmmi8.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/lm/lmr10.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/lm/lmr8.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/lm/lmss10.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/lm/lmsy10.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/lm/lmsy8.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb>
-Output written on hw4.pdf (5 pages, 223922 bytes).
+</usr/local/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmss10.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmss8.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmssbx10.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/lm/lmmi10.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/lm/lmmi8.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/lm/lmr10.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/lm/lmr8.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/lm/lmss10.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/lm/lmsy10.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/lm/lmsy6.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/lm/lmsy8.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb>
+Output written on hw4.pdf (6 pages, 234898 bytes).
 PDF statistics:
- 95 PDF objects out of 1000 (max. 8388607)
- 62 compressed objects within 1 object stream
- 6 named destinations out of 1000 (max. 500000)
+ 106 PDF objects out of 1000 (max. 8388607)
+ 70 compressed objects within 1 object stream
+ 7 named destinations out of 1000 (max. 500000)
  15896 words of extra memory for PDF output out of 17280 (max. 10000000)
 
