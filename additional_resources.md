@@ -7,3 +7,6 @@
 
 ## Counter Mode Encryption (CTR)
 - [Udacity](https://youtu.be/6EbyCGrdKh8?si=PSOOT3-HMlA8o-6A)
+
+## Extended Euclidean Algorithm
+- [John Bowers](https://youtu.be/6KmhCKxFWOs?si=z5wlDzbk2q3WGwt_)
