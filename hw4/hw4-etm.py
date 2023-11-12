@@ -111,9 +111,9 @@ def guess_tag_byte(oracle, altered_cipher, guessed_tag, byte_index, baseline_tim
                     total_time += (end - start)
                 avg = total_time / 100
 
-                print(f"Byte {byte_index}, Guess {guess}, Time: {avg}") 
-                print()
+               
                 if (avg * 1.01 >= baseline_time ):
+                    print(f"Byte {byte_index}, Guess {guess}, Time: {avg}") 
                     correct_guess = guess
                     break
                 continue 
