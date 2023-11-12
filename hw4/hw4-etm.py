@@ -64,7 +64,7 @@ def measure_baseline_time(oracle, cipher, byte_index, trials=100):
     total_time = 0
     test_cipher = cipher
     if byte_index > 0:
-        wrong_tag = b'\x00' * byte_index  
+        wrong_tag = b'\xff' * byte_index  
         test_cipher = cipher[:-byte_index] + wrong_tag
 
     for _ in range(trials):
@@ -114,6 +114,7 @@ def guess_tag_byte(oracle, altered_cipher, guessed_tag, byte_index, baseline_tim
                
                 if (avg * 1.01 >= baseline_time ):
                     print(f"Byte {byte_index}, Guess {guess}, Time: {avg}") 
+                    print()
                     correct_guess = guess
                     break
                 continue 
