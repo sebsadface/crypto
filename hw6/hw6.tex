@@ -54,29 +54,14 @@
 \definecolor{codepurple}{rgb}{0.58,0,0.82}
 \definecolor{backcolour}{rgb}{0.95,0.95,0.92}
 
-\lstdefinelanguage{JavaScript}{
-  keywords={typeof, new, true, false, catch, function, return, null, catch, switch, var, if, in, while, do, else, case, break},
-  keywordstyle=\color{blue}\bfseries,
-  ndkeywords={class, export, boolean, throw, implements, import, this},
-  ndkeywordstyle=\color{darkgray}\bfseries,
-  identifierstyle=\color{black},
-  sensitive=false,
-  comment=[l]{//},
-  morecomment=[s]{/*}{*/},
-  commentstyle=\color{purple}\ttfamily,
-  stringstyle=\color{red}\ttfamily,
-  morestring=[b]',
-  morestring=[b]"
-}
-
 \lstdefinestyle{mystyle}{
-    language=JavaScript,
+    language=Python,
+    basicstyle=\ttfamily\small,
+    keywordstyle=\color{blue},
+    stringstyle=\color{red},
+    commentstyle=\color{green},
+    morecomment=[l][\color{magenta}]{\#},
     backgroundcolor=\color{backcolour},   
-    commentstyle=\color{codegreen},
-    keywordstyle=\color{magenta},
-    numberstyle=\tiny\color{codegray},
-    stringstyle=\color{codepurple},
-    basicstyle=\ttfamily\footnotesize,
     breakatwhitespace=false,         
     breaklines=true,                 
     captionpos=b,                    
@@ -161,14 +146,53 @@
 \begin{question}{Task 1 - RSA Modulus Generation (10 points)}
     \begin{part}
        \begin{answer}
-            
+            Given that $N = PQ$, $P = R - i$ and $Q = R + j$, where $R$ is a k-bit integer and (since primes are dense) $i, j$ are relatively small integers, we have two scenarios:\\
+            1. If $R$ is not a prime, then $P$ and $Q$ are neighboring primes in the set of $k$-bit numbers.\\
+            2. If $R$ is a prime, then $P$ and $Q$ are immediate prime neighbors of $R$.\\\\
+            In both scenarios, since $P$ and $Q$ are close to each other, the value of $N$ can be efficiently factorized.
+            One approach can be to search for primes near the square root of $N$, which would be approximately $\sqrt{N} \approx R$. 
+            This search is feasible in polynomial time relative to $k$, which makes the RSA keys generated using this method insecure.\\\\
+            The proximity of $P$ and $Q$ ( $|P - Q|$  is small) significantly reduces the complexity of the factorization problem. 
+            Since RSA security relies on the difficulty of factoring $N$, the method mentioned above of generating
+            $P$ and $Q$ compromises the security of RSA modulus.
         \end{answer}
     \end{part}
-
+\newpage
     \begin{part}
         \begin{answer}
-             
+             $P = 35123014591230139123011933120312223198716238123918231119382061$ \\
+             $Q = 35123014591230139123011933120312223198716238123918231119382447$ 
          \end{answer}
+         \begin{lstlisting}
+    from sympy import isprime
+    from timeit import default_timer as timer
+    import math
+
+    # The RSA modulus N
+    N = 12336261539757652568320691057196254494530050076556470009232333
+        67120767290238588667397052161653352801437540471197470570083267
+
+    def factor(N):
+        # Approximate square root of N
+        approx_sqrt_N = int(math.isqrt(N))
+
+        # Search for prime factors near the square root of N
+        for i in range(approx_sqrt_N, 1, -1):
+            print("Trying i = ", i)
+            if N % i == 0 and isprime(i):
+                # double check
+                if isprime(N // i) and i * (N // i) == N:
+                    return i, N // i
+
+        print("Error: no factors found")
+        return None, None
+
+    # Find P and Q
+    timer_start = timer()
+    P, Q = factor(N)
+    timer_end = timer()
+    print("P = ", P, "Q = ", Q, "Time = ", timer_end - timer_start)
+        \end{lstlisting}
      \end{part}
 
 \end{question}
