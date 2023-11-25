@@ -151,10 +151,13 @@
             2. If $R$ is a prime, then $P$ and $Q$ are immediate prime neighbors of $R$.\\\\
             In both scenarios, since $P$ and $Q$ are close to each other, the value of $N$ can be efficiently factorized.
             One approach can be to search for primes near the square root of $N$, which would be approximately $\sqrt{N} \approx R$. 
-            This search is feasible in polynomial time relative to $k$, which makes the RSA keys generated using this method insecure.\\\\
+            This search is feasible in polynomial time relative to $k$. Once an attacker can factor \( N \) and find \( P \) and \( Q \), 
+            they can efficiently compute the private key by using the public key $PK(N, e)$ and looking for a decryption exponent
+            $d$ in $\mathbb{Z}_{(P-1)(Q-1)}^*$ , such that $e d = 1 \text{ (mod } (P-1)(Q -1))$.\\\\
             The proximity of $P$ and $Q$ ( $|P - Q|$  is small) significantly reduces the complexity of the factorization problem. 
             Since RSA security relies on the difficulty of factoring $N$, the method mentioned above of generating
             $P$ and $Q$ compromises the security of RSA modulus.
+           
         \end{answer}
     \end{part}
 \newpage
@@ -201,19 +204,71 @@
 \begin{question}{Task 2 - ElGamal and DDH (15 points)}
     \begin{part}
         \begin{answer}
-             
+            \textbf{Decryption Algorithm:}
+            \begin{center}
+                \begin{tabular}{|l|}
+                    \hline
+                    \underline{\textbf{procedure} Dec($\text{SK}, C = (C_1, C_2)$) :} \\
+                    \textbf{if} $C_1^{\text{SK}} = C_2$ \textbf{then} \\
+                    \hspace*{22pt} \textbf{return} $0$ \\
+                    \textbf{else} \\
+                    \hspace*{22pt} \textbf{return} $1$\\
+                    \hline
+                \end{tabular}
+            \end{center}
+            \textbf{Correctness when $b = 0$:} \\
+            - During encryption, we have \( C_1 = g^y \) and \( C_2 = PK^y = (g^x)^y = g^{xy} \).\\
+            - During decryption, we have \( C_1^{\text{SK}} = (g^y)^x = g^{yx} = g^{xy} = C_2 \).\\
+            - Thus, when $b = 0$, the decryption algorithm will always correctly output $0$.\\\\
+            \textbf{Correctness when $b = 1$:} \\
+            - During encryption, we have \( C_1 = g^y \) and \( C_2 = g^z \), where \( y \overset{\text{\$}}{\leftarrow} \mathbb{Z}_p  \) 
+            and \( z \overset{\text{\$}}{\leftarrow} \mathbb{Z}_p \).\\
+            - During decryption, we have \( C_1^{\text{SK}} = (g^y)^x = g^{yx} \). Since \( y \) and \( z \) are independently and uniformly 
+            chosen from \( \mathbb{Z}_p \)and group $\mathbb{Z}_p$ has prime order $p$, the probability that \( g^{yx} = g^z \) (i.e., \( C_1^{\text{SK}} = C_2 \)) 
+            is $$\text{Pr}[ yx \equiv z  \text{ (mod } p )] = \frac{1}{p} $$
+            - Thus, the probability of the decryption algorithm incorrectly return $0$ is \( \frac{1}{p} \), which is very small when the prime order 
+            $p$ is sufficiently large.\\\\
+            Therefore, we have shown that the correctness requirement of the scheme may sometimes not hold, but only with very small probability.
+         \end{answer}
+     \end{part}
+\newpage
+     \begin{part}
+        \begin{answer}
+            \begin{center}
+            \begin{tabular}{|l|}
+                \hline
+                    \underline{\textbf{oracle} $\text{O}^{\text{DDH}_b[\mathbb{G},g]}$:} \\\\
+                    \underline{private \textbf{procedure} Init($X,Y,Z$):} \;\;\;\;\;\; \textcolor{blue}{// $(X,Y,Z) \leftarrow \text{DDH}_b[\mathbb{G},g]$}\\
+                        (PK, $Y$, $Z$) $\leftarrow (X,Y,Z)$\\
+                        queried \(\leftarrow 0\)\\
+                        \textbf{return} PK\\\\
+                    \underline{public \textbf{procedure} Encrypt($M^0, M^1$):}  \;\;\;\;\;\; // \textcolor{blue}{$M^0,M^1 \in \mathcal{M} = \{0,1\}$}\\
+                        \textbf{if} $|M^0| \ne |M^1|$ \textbf{or} queried $= 1$ \textbf{return} $\bot$\\
+                        \textbf{if} $M^b = b$ \textbf{then}\\
+                        \hspace*{22pt} $C \leftarrow (Y, Z)$ \;\;\;\;\;\; \textcolor{blue}{// When $M^0 = 0$, $C = (g^y, g^{xy})$. When $M^1 = 1$, $C = (g^y, g^{z})$}\\
+                        \textbf{else if} $M^b = 0$ \\
+                        \hspace*{22pt} $y' \overset{\text{\$}}{\leftarrow} \mathbb{Z}_p$\\
+                        \hspace*{22pt} $C \leftarrow (g^{y'}, \text{PK}^{y'})$\;\;\;\;\;\; \textcolor{blue}{// Here $M^1 = 0$, $Z= g^z$, so we need a new $y'$ s.t.$C = (g^{y'}, g^{xy'})$ }\\
+                        \textbf{else}\\
+                        \hspace*{22pt} $z' \overset{\text{\$}}{\leftarrow} \mathbb{Z}_p$\\
+                        \hspace*{22pt} $C \leftarrow (Y, g^{z'})$\;\;\;\;\;\; \textcolor{blue}{// Here $M^0 = 1$, $Z= g^{xy}$, so we need a new $z'$ s.t.$C = (g^{y}, g^{z'})$ }\\
+                        queried $\leftarrow 1$\\
+                        \textbf{return} $C$\\
+                    \hline
+            \end{tabular}
+        \end{center}
          \end{answer}
      \end{part}
 
      \begin{part}
         \begin{answer}
-             
-         \end{answer}
-     \end{part}
-
-     \begin{part}
-        \begin{answer}
-             
+             Using the oracle $\text{O}$ from part (b), for any distinguisher $D$, setting $D' = D^{\text{O}}$ we have:
+                $$\text{Adv}^{\text{ddh}}_{\mathbb{G},g}(D) = \text{Adv}^{\text{1-ind-cpa}}_{\Pi}(D')$$
+                Further, if $D$ is polynomial time, because O’s procedures all run in polynomial time, we also have that $D'$ is polynomial time.\\
+                Then, because we assume DDH assumption holds for $\mathbb{G}$ with respect to $g$, $\text{Adv}^{\text{ddh}}_{\mathbb{G},g}(D)$ is negligible, which 
+                means that $\text{Adv}^{\text{1-ind-cpa}}_{\Pi}(D')$ is also negligible (since the input of $D'$ first passed through the Init procedure of O, which takes 
+                the output oracle $\text{DDH}_b[\mathbb{G}, g]$ as input).\\
+                Therefore, we have shown that if DDH assumption holds for $\mathbb{G}$ with respect to $g$, then $\Pi$ is one-time IND-CPA secure.
          \end{answer}
      \end{part}
 
