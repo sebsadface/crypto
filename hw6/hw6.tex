@@ -234,36 +234,56 @@
 \newpage
      \begin{part}
         \begin{answer}
+            The following oracle satisfies this, which is given access to $\mathsf{DDH}_b[\mathbb{G}, g]$ for $b \in \{0, 1\}$.
             \begin{center}
             \begin{tabular}{|l|}
                 \hline
                     \underline{\textbf{oracle} $\text{O}^{\text{DDH}_b[\mathbb{G},g]}$:} \\\\
                     \underline{private \textbf{procedure} Init($X,Y,Z$):} \;\;\;\;\;\; \textcolor{blue}{// $(X,Y,Z) \leftarrow \text{DDH}_b[\mathbb{G},g]$}\\
-                        (PK, $Y$, $Z$) $\leftarrow (X,Y,Z)$\\
                         queried \(\leftarrow 0\)\\
-                        \textbf{return} PK\\\\
-                    \underline{public \textbf{procedure} Encrypt($M^0, M^1$):}  \;\;\;\;\;\; // \textcolor{blue}{$M^0,M^1 \in \mathcal{M} = \{0,1\}$}\\
-                        \textbf{if} $|M^0| \ne |M^1|$ \textbf{or} queried $= 1$ \textbf{return} $\bot$\\
-                        \textbf{if} $M^b = b$ \textbf{then}\\
-                        \hspace*{22pt} $C \leftarrow (Y, Z)$ \;\;\;\;\;\; \textcolor{blue}{// When $M^0 = 0$, $C = (g^y, g^{xy})$. When $M^1 = 1$, $C = (g^y, g^{z})$}\\
-                        \textbf{else if} $M^b = 0$ \\
-                        \hspace*{22pt} $y' \overset{\text{\$}}{\leftarrow} \mathbb{Z}_p$\\
-                        \hspace*{22pt} $C \leftarrow (g^{y'}, \text{PK}^{y'})$\;\;\;\;\;\; \textcolor{blue}{// Here $M^1 = 0$, $Z= g^z$, so we need a new $y'$ s.t.$C = (g^{y'}, g^{xy'})$ }\\
-                        \textbf{else}\\
-                        \hspace*{22pt} $z' \overset{\text{\$}}{\leftarrow} \mathbb{Z}_p$\\
-                        \hspace*{22pt} $C \leftarrow (Y, g^{z'})$\;\;\;\;\;\; \textcolor{blue}{// Here $M^0 = 1$, $Z= g^{xy}$, so we need a new $z'$ s.t.$C = (g^{y}, g^{z'})$ }\\
+                        \textbf{return} $X$\\\\
+                    \underline{public \textbf{procedure} Encrypt():} \\
+                        \textbf{if} queried $= 1$ \textbf{return} $\bot$\\
+                        $C \leftarrow (Y,Z)$;
                         queried $\leftarrow 1$\\
                         \textbf{return} $C$\\
                     \hline
             \end{tabular}
         \end{center}
+        We can see that:\\
+        1) \( O^{\mathsf{DDH}_0[\mathbb{G},g]} \equiv \mathsf{1-LR}_0[\Pi] \):\\
+        The \( \text{Init} \) procedure in oracle \( O \) takes input \( (X,Y,Z) = (g^x, g^y, g^{xy}) \)
+        from \( \mathsf{DDH}_0[\mathbb{G},g] \).
+        The \( \text{Init} \) procedure then returns \( X \) which is analogous to the public key \( PK = g^x \) 
+        in the \( \mathsf{1-LR}_0[\Pi] \) oracle.\\
+        The \( \text{Encrypt} \) procedure in \( O \) outputs \( (Y, Z) \) which corresponds to 
+        \( (g^y, g^{xy}) \). In \( \mathsf{1-LR}_0[\Pi] \), when \( b = 0 \), the encryption algorithm outputs 
+        \( (C_1, C_2) = (g^y, PK^y) \). Here, \( PK^y = (g^x)^y = g^{xy} \), which matches the output 
+        of \( O \) under \( \mathsf{DDH}_0[\mathbb{G},g] \). \\
+        Therefore, \( O^{\mathsf{DDH}_0[\mathbb{G},g]} \) 
+        is equivalent to \( \mathsf{1-LR}_0[\Pi] \).\\
+        
+        2) \( O^{\mathsf{DDH}_1[\mathbb{G},g]} \equiv \mathsf{1-LR}_1[\Pi] \):\\
+        The \( \text{Init} \) procedure takes \( (X,Y,Z) = (g^x, g^y, g^z) \) 
+        from \( \mathsf{DDH}_1[\mathbb{G},g] \) and returns \( X \), which serves as the public key \( PK \).\\
+        The \( \text{Encrypt}() \) procedure 
+        in \( O \) under \( \mathsf{DDH}_1[\mathbb{G},g] \) outputs \( (Y, Z) \), which corresponds to \( (g^y, g^z) \). 
+        In \( \mathsf{1-LR}_1[\Pi] \), when \( b = 1 \), the encryption algorithm chooses random \( y, z \) 
+        in \( \mathbb{Z}_p \) and outputs \( (C_1, C_2) = (g^y, g^z) \)  which matches the output 
+        of \( O \) under \( \mathsf{DDH}_1[\mathbb{G},g] \). \\
+        Therefore, \( O^{\mathsf{DDH}_1[\mathbb{G},g]} \) 
+        is equivalent to \( \mathsf{1-LR}_1[\Pi] \).\\
          \end{answer}
      \end{part}
-
+\newpage
      \begin{part}
         \begin{answer}
-             Using the oracle $\text{O}$ from part (b), for any distinguisher $D$, setting $D' = D^{\text{O}}$ we have:
-                $$\text{Adv}^{\text{ddh}}_{\mathbb{G},g}(D) = \text{Adv}^{\text{1-ind-cpa}}_{\Pi}(D')$$
+             Using the oracle $\text{O}$ from part (b), let $D$ by a polynomial-time distinguisher, then we have:
+             \begin{align*}
+                \text{Adv}^{\text{1-ind-cpa}}_{\Pi}(D) &= |\text{Pr}[D^{\text{1-LR}_0[\Pi]} \Rightarrow 1] - \text{Pr}[D^{\text{1-LR}_1[\Pi]} \Rightarrow 1]|\\
+                &= |\text{Pr}[D^{O^{\text{DDH}_0[\mathbb{G},g]}} \Rightarrow 1] - \text{Pr}[D^{O^{\text{DDH}_1[\mathbb{G},g]}} \Rightarrow 1]|\\
+                &= \text{Adv}^{\text{ddh}}_{\mathbb{G},g}(D') \tag*{\textcolor{blue}{// where $D' = D^{O^{\text{DDH}_b[\mathbb{G},g]}}$}}\\
+             \end{align*}
                 Further, if $D$ is polynomial time, because O’s procedures all run in polynomial time, we also have that $D'$ is polynomial time.\\
                 Then, because we assume DDH assumption holds for $\mathbb{G}$ with respect to $g$, $\text{Adv}^{\text{ddh}}_{\mathbb{G},g}(D)$ is negligible, which 
                 means that $\text{Adv}^{\text{1-ind-cpa}}_{\Pi}(D')$ is also negligible (since the input of $D'$ first passed through the Init procedure of O, which takes 
@@ -278,19 +298,65 @@
 \begin{question}{Task 3 - Chosen-Ciphertext Security (10 points)} 
     \begin{part}
         \begin{answer}
-             
-         \end{answer}
+            To produce a modified ciphertext \( C' \) that encrypts \( M \star \delta \) (for a known \( \delta \in \mathbb{G} \)), we first know 
+            that the encryption of \( M \star \delta \) should be \( (g^r, (M \star \delta) \star \text{PK}^r) \) by the ElGamal scheme.\\
+            The operation \( \star \) in cyclic group \( \mathbb{G} \) is known to be associative and commutative, the expression 
+            \( (M \star \delta) \star \text{PK}^r \) can be rewritten as \( (M \star \text{PK}^r) \star \delta \) \\
+            Thus, the modified ciphertext \( C' \) can be computed as:
+            \[ C' = (g^r, (M \star \text{PK}^r) \star \delta) \]
+            Since \( C = (g^r, M \star \text{PK}^r) \) is known, assuming the group operation \( \star \) is efficiently computable, 
+            we can efficiently calculate the second component of \( C' \) as \( (M \star \text{PK}^r) \star \delta \).\\
+            Therefore, we have shown that we can efficiently produce the encryption of \( M \star \delta \) given the encryption of 
+            \( M \) and a known \( \delta \).
+        \end{answer}
      \end{part}
 
      \begin{part}
         \begin{answer}
-             
-         \end{answer}
+            We know that $M_1 \ne M_2$. Let's assume for contradiction that $M_1 \star \delta = M_2 \star \delta$.\\
+            Since $\delta \in \mathbb{G}$, by the inverse property of groups, we know there exists $\delta^{-1} \in \mathbb{G}$ 
+            such that $\delta \star \delta^{-1} = 1$.\\
+            Then, we can multiply both sides of the equation $M_1 \star \delta = M_2 \star \delta$ by $\delta^{-1}$ to get:
+            $$M_1 \star \delta \star \delta^{-1} = M_2 \star \delta \star \delta^{-1}$$
+            which, by the identity property of group, simplifies to:
+            $$M_1 = M_2 $$
+            This contradicts the fact that $M_1 \ne M_2$. \\
+            Therefore, by contradiction, we have shown that $M_1 \star \delta \ne M_2 \star \delta$ (i.e. $M_1 \star \delta$ 
+            and $M_2 \star \delta$ are distinct).
+        \end{answer}
      \end{part}
-
+\newpage
      \begin{part}
         \begin{answer}
-             
+            An attack on the given ElGamal scheme is demonstrated by the following distinguisher \( D \), which accesses the oracle \( \text{LRD}_b[\Pi] \), where \( \Pi \) is the ElGamal scheme.
+             \begin{center}
+                \begin{tabular}{|l|}
+                    \hline
+                        \underline{\textbf{distinguisher} $D^{\text{O}}(\text{PK, } g)$:} \\
+                            $M_0 \leftarrow g^0$ \\
+                            $M_1 \leftarrow g^1$ \\
+                            $\delta \leftarrow g^2$ \\
+    
+                            $(C_1, C_2) \leftarrow $ O.Encrypt$(M_0, M_1)$\\
+                            $C' \leftarrow (C_1, C_2 \star \delta)$\\
+                            $M' \leftarrow \text{O.Decrypt(C')}$\\
+                            \textbf{if $M' = M_0 \star \delta$ then} \\
+                            \hspace{1em} \textbf{return} 1 \\
+                            \textbf{else return }0 \\
+                        \hline
+                        \end{tabular}
+            \end{center}
+            By the above:\\
+             When \( O = \text{LRD}_0[\Pi] \), the oracle encrypts \( M_0 = g^0 \). As shown in part(a), \( C' \) will be the 
+             encryption of \( M_0 \star \delta \), and the decryption oracle will return \( M_0 \star \delta \), which is not equal to $M_1 \star \delta$ (as shown in part(b)). 
+             Thus, \( D \) will always return 1.\\\\
+             When \( O = \text{LRD}_1[\Pi] \), the oracle encrypts \( M_1 = g^1 \). As shown in part(a), 
+             \( C' \) will be an encryption of \( M_1 \star \delta \), and the decryption oracle will return \( M_1 \star \delta \), 
+             which is not equal to $M_0 \star \delta$ (as shown in part(b)). Thus, \( D \) will always return 0.\\
+
+
+            So we have, $\text{Adv}^{\text{ind-cca}}_{\Pi}(D) = |\text{Pr}[D^{\mathsf{LRD}_0[\Pi]} \Rightarrow 1] - \text{Pr}[D^{\mathsf{LRD}_1[\Pi]} \Rightarrow 1]| = |1 - 0| = 1$.\\
+            Therefore, we have shown that the ElGamal encryption scheme is not IND-CCA secure.
          \end{answer}
      \end{part}
 
@@ -300,21 +366,78 @@
 \begin{question}{Task 4 - AES-Based Signatures (15 points)} 
     \begin{part}
         \begin{answer}
+            Given only \( VK \), an adversary does not have access to the secret key \( SK \) but only 
+            the AES encryptions of the secret key.\\
+             To forge a signature on any message \( M^* \), the adversary would need to produce a sequence 
+             \( \sigma^* \) such that \( \text{AES}(\sigma^*_i, 0^{128}) \) equals \( C_{i,M^*_i} \) for each bit \( i \) in 
+             \( M^* \). The adversary has two options:\\
+             1) Reverse the AES function to recover the secret key \( K_{i,M^*_i} \) from \( C_{i,M^*_i} \).\\
+             2) Guess the secret key \( K_{i,M^*_i} \) for each bit \( i \) in \( M^* \).\\
              
+             
+            By our assumption, inverting the AES function to recover the correct \( K_{i,M^*_i} \) from \( C_{i,M^*_i} \), 
+            is hard. Since the AES keys were chosen randomly and independently, the adversary gets no 
+            advantage in computing one key from another, so the problem remains hard for each bit of the message.\\
+            Thus, the first option is infeasible for "efficient" adversaries.\\
+             
+            Moreover, the adversary cannot simply guess the keys since they are 128-bit strings (the search space is
+            \( 2^{128} \)), which means the adversary will guess the correct key with very small probability. So, 
+            the second option is also infeasible for any "efficient" adversary.\\
+
+            Therefore, any "efficient" adversary cannot forge a signature \( \sigma^* \) for any message \( M^* \) such that 
+            \( \text{Ver}(VK, M^*, \sigma^*) \) outputs 1, which 
+            shows that the signature scheme \( \Sigma \) satisfies key-only unforgeability.
          \end{answer}
      \end{part}
 
      \begin{part}
         \begin{answer}
-             
+            If an adversary is given a valid signature \( \sigma \) for a message \( M \), they still face the same difficulty 
+            in part (a) for any bit of a new message \( M^* \neq M \). \\
+
+            The reason is that each bit \( M_i \) of \( M \) is signed with a distinct key \( K_{i,M_i} \). For any bit 
+            \( M_i^* \) of \( M^* \) that differs from \( M_i \), the adversary needs the corresponding key \( K_{i,M_i^*} \) 
+            to produce a valid signature bit \( \sigma_i^* \).\\
+
+            Since they only have \( K_{i,M_i} \) from the known signature 
+            \( \sigma \), and due to the hardness assumption of AES, they cannot efficiently derive \( K_{i,M_i^*} \) from any 
+            of the known information.\\
+
+            Therefore, even with a valid signature for a chosen message, the adversary cannot generate a new valid signature 
+            for any different message because each bit of the signature is protected by an independent key that the adversary 
+            cannot efficiently compute.
+ 
          \end{answer}
      \end{part}
-
+\newpage
      \begin{part}
         \begin{answer}
-             
+            To show that the scheme is not UF-CMA secure, consider the following adversary \( A \), which accesses the oracle
+            $\mathsf{UF-CMA}[\Sigma]$, where $\Sigma$ is the AES-based signature scheme proposed in the question.
+            \begin{center}
+                \begin{tabular}{l}
+                        \underline{\textbf{adversary} $A^{O}()$:} \\
+                            $(\sigma_1,...,\sigma_n) \leftarrow \mathsf{O.Eval}(0^n)$\\
+                            $(\sigma'_1,...,\sigma'_n) \leftarrow \mathsf{O.Eval}(1^n)$\\
+                            $M^* = (1 || 0^{n-1})$ \;\;\;\;\;\;\;\;\;\;\;\;\; \textcolor{blue}{// only flipping the first bit of $0^n$}\\
+                            $\sigma^* \leftarrow (\sigma'_1, \sigma_2,...,\sigma_n)$\;\;\;\;\;\; \textcolor{blue}{// only replacing $\sigma_1$ in $\sigma$ with $\sigma'_1$}\\
+                        \textbf{return} $M^*, \sigma^*$
+                    \end{tabular}
+                \end{center}
+
+            Since \( M^* \) is different from both \( 0^n \) and \( 1^n \), $M^*$ is unknown to the oracle (i.e., $M^* \notin \mathcal{Q}$).\\
+            Since the first bit of $M^*$ matches with $1^n$, \( \ \sigma_1^* = \sigma'_1 \) is a valid first signature 
+            bit for \( M^* \).\\
+            Since all other bits in $M^*$ matches with $0^n$, \( \sigma^*_i = \sigma_i \) ($1 < i \le n$) is a valid signature bit for $M^*$. \\
+            Thus, \( \sigma^* \) is a valid signature for \( M^* \).\\
+
+            The finalization procedure in the oracle will return $1$ when the adversary returns \( M^* \) and \( \sigma^* \) 
+            because for each bit \( i \), \( \text{AES}(\sigma_i^*, 0^{128}) = C_{i,M_i^*} \)\\
+            Therefore, \( \text{Adv}^{\text{uf-cma}}_{\Sigma} (A) = 1 \),
+            and \( A \) successfully forges a signature, which shows that the scheme $\Sigma$ is not UF-CMA secure.
          \end{answer}
      \end{part}
 
 \end{question}
 \end{document}
+
